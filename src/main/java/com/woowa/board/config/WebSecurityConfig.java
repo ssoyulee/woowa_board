@@ -10,16 +10,15 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
 
-    	// https://github.com/kkaok/examples
         http
                 .authorizeRequests()
                     .antMatchers(
-                            "/h2-console/**","/index"
+                            "/h2-console/**","/index","/static/**","/fragment/**","/layout/**","/user/**","/board/**","/post/**","/comment/**"
                     ).permitAll()
                     .anyRequest().authenticated()
                 .and()
 	            .csrf()
-	                .ignoringAntMatchers("/h2-console/**","/index")
+	                .ignoringAntMatchers("/h2-console/**","/index","/static/**","/fragment/**","/layout/**","/user/**","/board/**","/post/**","/comment/**")
 	            .and()
 	            .headers()
 	                .frameOptions()
