@@ -28,8 +28,8 @@ CREATE TABLE BOARD
 
 CREATE TABLE POST
 (
-	board_id integer not null,	
 	post_id integer not null,
+	board_id integer not null,
 	post_title varchar(4000) not null,
 	post_content clob not null,
 	del_yn varchar(1),
@@ -37,19 +37,23 @@ CREATE TABLE POST
 	reg_dts timestamp,
 	modpe_id varchar(255),
 	mod_dts timestamp,
-    primary key(board_id,post_id)
+    primary key(post_id)
 );
 
 CREATE TABLE COMMENT
 (
-	post_id integer not null,	
 	comment_id integer not null,
+	post_id integer not null,
 	comment_content clob not null,
 	del_yn varchar(1),
 	regpe_id varchar(255),
 	reg_dts timestamp,
 	modpe_id varchar(255),
 	mod_dts timestamp,
-    primary key(post_id,comment_id)
+    primary key(comment_id)
 );
 
+CREATE SEQUENCE USER_SEQ START WITH 2 INCREMENT BY 1;
+CREATE SEQUENCE BOARD_SEQ START WITH 2 INCREMENT BY 1;
+CREATE SEQUENCE POST_SEQ START WITH 2 INCREMENT BY 1;
+CREATE SEQUENCE COMMENT_SEQ START WITH 2 INCREMENT BY 1;

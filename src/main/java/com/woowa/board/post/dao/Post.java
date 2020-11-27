@@ -1,10 +1,13 @@
-package com.woowa.board.post;
+package com.woowa.board.post.dao;
 
 import java.time.LocalDateTime;
 
 import javax.persistence.Column;
-import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -12,16 +15,31 @@ import org.hibernate.annotations.UpdateTimestamp;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import lombok.ToString;
 
 @Entity(name="post")
+@SequenceGenerator(
+        name="POST_SEQ_GENERATOR",
+        sequenceName="POST_SEQ",
+        initialValue=1,
+        allocationSize=1
+)
 @Getter
+@Setter
 @ToString
 @NoArgsConstructor
 public class Post {
 
-	@EmbeddedId
-	private PostId postId;
+	@Id
+	@Column(name="post_id")
+    @GeneratedValue(strategy=GenerationType.SEQUENCE
+					,generator="POST_SEQ_GENERATOR"
+    )
+	private Long postId;
+	
+	@Column(name="board_id")
+	private Long boardId;
 	
 	@Column(name="post_title")
 	private String postTitle;
@@ -47,8 +65,8 @@ public class Post {
 	private LocalDateTime modDts;
 	
 	@Builder
-	public Post(PostId postId, String postTitle, String postContent, String explanation, String delYn, String regpeId, String modpeId) {
-		this.postId = postId;
+	public Post(Long boardId, String postTitle, String postContent, String explanation, String delYn, String regpeId, String modpeId) {
+		this.boardId = boardId;
 		this.postTitle = postTitle;
 		this.postContent = postContent;
 		this.delYn = delYn;

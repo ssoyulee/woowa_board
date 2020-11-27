@@ -1,10 +1,13 @@
-package com.woowa.board.comment;
+package com.woowa.board.comment.dao;
 
 import java.time.LocalDateTime;
 
 import javax.persistence.Column;
-import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -12,14 +15,31 @@ import org.hibernate.annotations.UpdateTimestamp;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
 @Entity(name="comment")
+@SequenceGenerator(
+        name="COMMENT_SEQ_GENERATOR",
+        sequenceName="COMMENT_SEQ",
+        initialValue=1,
+        allocationSize=1
+)
 @Getter
+@Setter
+@ToString
 @NoArgsConstructor
 public class Comment {
 
-	@EmbeddedId
-	private CommentId commentId;
+	@Id
+	@Column(name="comment_id")
+    @GeneratedValue(strategy=GenerationType.SEQUENCE
+    			,generator="COMMENT_SEQ_GENERATOR"
+    )
+	private Long commentId;
+	
+	@Column(name="post_id")
+	private Long postId;
 
 	@Column(name="comment_content")
 	private String commentContent;
@@ -42,8 +62,9 @@ public class Comment {
 	private LocalDateTime modDts;
 	
 	@Builder
-	public Comment(CommentId commentId, String commentContent, String name, String explanation, String delYn, String regpeId, String modpeId) {
+	public Comment(Long commentId, Long postId, String commentContent, String delYn, String regpeId, String modpeId) {
 		this.commentId = commentId;
+		this.postId = postId;
 		this.commentContent = commentContent;
 		this.delYn = delYn;
 		this.regpeId = regpeId;;

@@ -7,18 +7,24 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 @Configuration
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
+	private static final String[] AUTH_LIST = {
+	    "/h2-console/**","/index","/static/**","/fragment/**","/layout/**","/user/**","/board/**","/post/**","/comment/**",
+	    "/swagger-ui.html","/v2/api-docs", "/swagger-resources/**","/webjars/**","/swagger/**"
+	};
+	
     @Override
     protected void configure(HttpSecurity http) throws Exception {
 
         http
                 .authorizeRequests()
                     .antMatchers(
-                            "/h2-console/**","/index","/static/**","/fragment/**","/layout/**","/user/**","/board/**","/post/**","/comment/**"
+                    		AUTH_LIST
                     ).permitAll()
                     .anyRequest().authenticated()
                 .and()
 	            .csrf()
-	                .ignoringAntMatchers("/h2-console/**","/index","/static/**","/fragment/**","/layout/**","/user/**","/board/**","/post/**","/comment/**")
+//	                .ignoringAntMatchers("/h2-console/**")
+	            .ignoringAntMatchers(AUTH_LIST)
 	            .and()
 	            .headers()
 	                .frameOptions()
@@ -37,4 +43,5 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 //                    .logoutSuccessUrl("얼씨구")
 //                    .permitAll();
     }
+    
 }

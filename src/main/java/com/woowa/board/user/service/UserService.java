@@ -1,9 +1,12 @@
-package com.woowa.board.user;
+package com.woowa.board.user.service;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.woowa.board.user.dao.User;
+import com.woowa.board.user.dao.UserRepository;
 
 @Service
 public class UserService {

@@ -1,10 +1,13 @@
-package com.woowa.board.user;
+package com.woowa.board.user.dao;
 
 import java.time.LocalDateTime;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -14,10 +17,19 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @Entity(name = "user")
+@SequenceGenerator(
+        name="USER_SEQ_GENERATOR",
+        sequenceName="USER_SEQ",
+        initialValue=1,
+        allocationSize=1
+)
 public class User {
 	
 	@Id
 	@Column(name="user_id")
+    @GeneratedValue(strategy=GenerationType.SEQUENCE
+		,generator="USER_SEQ_GENERATOR"
+	)
 	private String userId;
 	
 	@Column(name="password")

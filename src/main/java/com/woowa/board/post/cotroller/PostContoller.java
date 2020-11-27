@@ -1,4 +1,4 @@
-package com.woowa.board.post;
+package com.woowa.board.post.cotroller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
