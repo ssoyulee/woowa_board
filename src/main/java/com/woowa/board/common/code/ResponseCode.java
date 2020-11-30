@@ -1,4 +1,4 @@
-package com.woowa.board.common;
+package com.woowa.board.common.code;
 
 public enum ResponseCode {
 

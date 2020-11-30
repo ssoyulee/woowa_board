@@ -21,8 +21,8 @@ import com.woowa.board.board.dao.Board;
 import com.woowa.board.board.service.BoardService;
 import com.woowa.board.board.vo.BoardRequest;
 import com.woowa.board.board.vo.BoardResponse;
-import com.woowa.board.common.ResponseCode;
-import com.woowa.board.common.ResponseDto;
+import com.woowa.board.common.code.ResponseCode;
+import com.woowa.board.common.dto.ResponseDto;
 
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;

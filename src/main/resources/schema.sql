@@ -6,6 +6,7 @@ CREATE TABLE USER
 	email varchar(255),
 	ranking integer,
 	del_yn varchar(1),
+	role varchar(10),
 	regpe_id varchar(255),
 	reg_dts timestamp,
 	modpe_id varchar(255),
@@ -53,7 +54,6 @@ CREATE TABLE COMMENT
     primary key(comment_id)
 );
 
-CREATE SEQUENCE USER_SEQ START WITH 2 INCREMENT BY 1;
 CREATE SEQUENCE BOARD_SEQ START WITH 2 INCREMENT BY 1;
 CREATE SEQUENCE POST_SEQ START WITH 2 INCREMENT BY 1;
 CREATE SEQUENCE COMMENT_SEQ START WITH 2 INCREMENT BY 1;

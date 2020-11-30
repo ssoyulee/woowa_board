@@ -19,8 +19,8 @@ import com.woowa.board.comment.dao.Comment;
 import com.woowa.board.comment.service.CommentService;
 import com.woowa.board.comment.vo.CommentRequest;
 import com.woowa.board.comment.vo.CommentResponse;
-import com.woowa.board.common.ResponseCode;
-import com.woowa.board.common.ResponseDto;
+import com.woowa.board.common.code.ResponseCode;
+import com.woowa.board.common.dto.ResponseDto;
 
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;

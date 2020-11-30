@@ -2,9 +2,10 @@ package com.woowa.board.post.vo;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 @Getter
-@Setter
+@ToString
 public class PostRequest {
 
 	private Long boardId;

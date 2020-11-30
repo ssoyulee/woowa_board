@@ -15,8 +15,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.woowa.board.common.ResponseCode;
-import com.woowa.board.common.ResponseDto;
+import com.woowa.board.common.code.ResponseCode;
+import com.woowa.board.common.dto.ResponseDto;
 import com.woowa.board.post.dao.Post;
 import com.woowa.board.post.service.PostService;
 import com.woowa.board.post.vo.PostRequest;

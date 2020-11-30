@@ -2,7 +2,7 @@ package com.woowa.board.post.vo;
 
 import java.util.List;
 
-import com.woowa.board.common.ResponseDto;
+import com.woowa.board.common.dto.ResponseDto;
 import com.woowa.board.post.dao.Post;
 
 import lombok.Getter;

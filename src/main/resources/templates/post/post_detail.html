@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout/default">
+	
+    <th:block layout:fragment="css">
+	    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
+    </th:block>
+    <!-- index.html 고유 스크립트 추가 -->
+    <th:block layout:fragment="script">
+	    <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>    
+        <script th:src="@{/static/js/post/post_detail.js}"></script>
+		<script>
+			let p_postId = "[[${postId}]]";
+		</script>        
+    </th:block>
+	
+    <div layout:fragment="content">
+	    <div id="post_detail_app">
+			<div class="container">
+				<div class="row">
+					<div class="col">
+				    	<br>
+					    <h3 class="text-left">{{post.postTitle}}</h3>
+					    <br>
+					</div>
+				</div>
+	    		<div class="row">
+	    			<div class="col" style="text-align:right;">				
+					    <a href="/post/update"><button class="btn btn-primary" type ="button">수정</button></a>
+					    <a href="/post/delete"><button class="btn btn-primary" type ="button">삭제</button></a>
+					</div>
+				</div>					
+				<div class="row">
+					<div class="col">
+						<div class="input-group input-group-sm" role="group" style="text-align: left">
+							<table class="table table-striped table-bordered">
+								<colgroup>
+									<col style="width: 20%">
+									<col style="width: 80%">
+								</colgroup>
+								<tr>
+									<td>글번호</td><td>{{post.postId}}</td>
+								</tr>
+								<tr>
+									<td colspan="2">
+										<textarea id="postContent" name="postContent" class="form-control" style="background-color: white;" rows="10" cols="80" readonly="readonly">
+											{{post.postContent}}
+										</textarea>
+									</td>
+								</tr>
+							</table>
+		
+						</div>
+					</div>
+				</div>
+				
+				<div class="row">
+					<div class="col">
+				    	<br>
+					    <h4 class="text-left">comment</h4>
+					    <br>						
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="col-11">
+				    	<textarea rows="3" class="col-12"></textarea>						
+					</div>
+					<div>
+						<a href="/post/update"><button class="btn btn-primary" type ="button">등록</button></a>
+					</div>
+				</div>
+							
+				<div class="row" v-for="comment in comment_list">
+					<div class="col">
+						{{comment.commentContent}}
+					</div>
+				</div>
+	        </div>      
+    	</div>
+    </div>
+    
+</html>

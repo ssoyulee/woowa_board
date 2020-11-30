@@ -1,4 +1,6 @@
-package com.woowa.board.common;
+package com.woowa.board.common.dto;
+
+import com.woowa.board.common.code.ResponseCode;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;

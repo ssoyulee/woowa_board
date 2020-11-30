@@ -15,21 +15,16 @@ import org.hibernate.annotations.UpdateTimestamp;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
+@Getter
+@Setter
+@NoArgsConstructor
 @Entity(name = "user")
-@SequenceGenerator(
-        name="USER_SEQ_GENERATOR",
-        sequenceName="USER_SEQ",
-        initialValue=1,
-        allocationSize=1
-)
 public class User {
 	
 	@Id
 	@Column(name="user_id")
-    @GeneratedValue(strategy=GenerationType.SEQUENCE
-		,generator="USER_SEQ_GENERATOR"
-	)
 	private String userId;
 	
 	@Column(name="password")
@@ -43,6 +38,9 @@ public class User {
 	
 	@Column(name="ranking")
 	private Long ranking;
+	
+	@Column(name="role")
+	private String role;	
 	
 	@Column(name="del_yn")
 	private String delYn;
@@ -62,12 +60,13 @@ public class User {
 	private LocalDateTime modDts;
 	
 	@Builder
-	public User(String userId, String password, String name, String email, Long ranking, String delYn, String regpeId, String modpeId) {
+	public User(String userId, String password, String name, String email, Long ranking, String role, String delYn, String regpeId, String modpeId) {
 		this.userId = userId;
 		this.password = password;
 		this.name = name;
 		this.email = email;
 		this.ranking = ranking;
+		this.role = role;
 		this.delYn = delYn;
 		this.regpeId = regpeId;;
 		this.modpeId = modpeId;
