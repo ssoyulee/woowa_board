@@ -18,7 +18,7 @@
     </th:block>
 
     <div layout:fragment="content">
-	    <div id="app">
+	    <div id="board_app">
 	    	<div class="container">
 	    		<div class="row">
 	    			<div class="col">
@@ -29,7 +29,7 @@
 				</div>
 	    		<div class="row">
 	    			<div class="col" style="text-align:right">				
-					    <a href="/post/register"><button class="btn btn-primary" type ="button">글쓰기</button></a>
+					    <button class="btn btn-primary" type ="button" v-on:click="go_insert_page">글쓰기</button>
 					</div>
 				</div>
 	    		<div class="row">

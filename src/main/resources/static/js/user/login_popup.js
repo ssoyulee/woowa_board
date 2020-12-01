@@ -15,6 +15,7 @@ const login = () =>{
         success : function(data) {
             if ( data.resultCode == '00' ) {
 				alert('로그인 성공');
+				$(opener.location).attr("href", "javascript:setLogin();");
 				window.close();
 			}
         }, // success 

@@ -1,6 +1,8 @@
 package com.woowa.board.post.cotroller;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -66,7 +68,7 @@ public class PostRestController {
 		@ApiImplicitParam(name="boardId", value="게시판ID", required = true, dataTypeClass = Long.class, paramType = "path", defaultValue = "1"),
 	})		
 	@ApiResponses({@ApiResponse(response = PostResponse.class, code = 200, message = "OK")})
-	@GetMapping(path = "/get/{boardId}")
+	@GetMapping(path = "/select/{boardId}")
 	public PostResponse selectPostByBoardId( @PathVariable Long boardId) throws Exception {
 
 		logger.info("boardId =>" + boardId);
@@ -80,6 +82,32 @@ public class PostRestController {
     	} else {
     		response.setResponseCode(ResponseCode.SUCCESS);
     		response.setResultList(listPost);
+    	}
+
+		return response;
+	}
+
+	@ApiOperation(value = "게시물 정보 조회", notes = "게시물을 조회하는 기능")
+	@ApiImplicitParams({
+		@ApiImplicitParam(name="postId", value="게시글ID", required = true, dataTypeClass = Long.class, paramType = "path", defaultValue = "1"),
+	})		
+	@ApiResponses({@ApiResponse(response = PostResponse.class, code = 200, message = "OK")})
+	@GetMapping(path = "/get/{postId}")
+	public PostResponse getPost( @PathVariable Long postId) throws Exception {
+
+		logger.info("boardId =>" + postId);
+		
+		PostResponse response = new PostResponse();
+		
+		Optional<Post> post = postService.selectPostById(postId);
+		
+    	if ( post.isPresent() ) {
+    		List<Post> listPost = new ArrayList<Post>();
+    		listPost.add(post.get());
+    		response.setResponseCode(ResponseCode.SUCCESS);
+    		response.setResultList(listPost);
+    	} else {
+    		response.setResponseCode(ResponseCode.IS_EMPTY);
     	}
 
 		return response;

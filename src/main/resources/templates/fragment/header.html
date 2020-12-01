@@ -1,13 +1,16 @@
+
+
+
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
        
 	<meta charset="utf-8">
     <!--headerFragment 선언-->
     <div th:fragment="headerFragment">
-    	<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
-    		<div class="row" style="width: 100%">
-	    		<div class="col-10">
-		    		<div id = "header_app">
+    	<div id = "header_app">
+	    	<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+	    		<div class="row" style="width: 100%">
+		    		<div class="col-10">
 			    		<ul class = "navbar-nav">
 				    		<li class="nav-item">
 				    			<a class="nav-link" href="/index">메인</a>
@@ -17,21 +20,24 @@
 				    		</li>
 			    		</ul>
 		    		</div>
+		    		<div class="col-2">
+			    		<div id = "header_app">
+				    		<ul class = "navbar-nav">
+					    		<li class="nav-item">
+					    			<a class="nav-link" href="#">어드민</a>
+					    		</li>
+					    		<li v-if="is_login" class="nav-item">
+					    			<a class="nav-link" href="#" v-on:click="logout">로그아웃</a>
+					    		</li>
+					    		<li v-else class="nav-item">
+					    			<a class="nav-link" href="#" v-on:click="login">로그인</a>
+					    		</li>				    		
+					    	</ul>
+					    </div>
+		    		</div>
 	    		</div>
-	    		<div class="col-2">
-		    		<div id = "header_app">
-			    		<ul class = "navbar-nav">
-				    		<li class="nav-item">
-				    			<a class="nav-link" href="#">어드민</a>
-				    		</li>	    		
-				    		<li class="nav-item">
-				    			<a class="nav-link" href="javascript:open_popup_login()">로그인</a>
-				    		</li>
-				    	</ul>
-				    </div>
-	    		</div>
-    		</div>
-    	</nav>
+	    	</nav>
+    	</div>
     </div>
 	
 </html>
