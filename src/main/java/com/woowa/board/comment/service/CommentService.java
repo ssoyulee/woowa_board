@@ -30,10 +30,13 @@ public class CommentService {
 		return commentRepository.findAll();
 	}
 	
-	public List<Comment> getCommentByPostId(Long postId) throws Exception {
+	public List<Comment> getCommentByPostId(Long postId, String delYn) throws Exception {
 		
-		String delYn = "N";			// 지워지지 않은 댓글만 가져온다.
-		List<Comment> list_comment = commentRepository.selectCommentByPostId(postId, delYn);
+		if ( delYn == null || delYn.isEmpty() ) {
+			delYn = "N";			// 지워지지 않은 댓글만 가져온다.
+		}
+		
+		List<Comment> list_comment = commentRepository.findAllByPostIdAndDelYnOrderByCommentIdDesc(postId, delYn);
 
 		logger.info("postId => "+ postId + " comment count => " + list_comment.size());
 		

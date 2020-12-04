@@ -64,16 +64,17 @@ public class CommentRestController {
 	@ApiOperation(value = "댓글 정보 조회", notes = "게시물 번호로 댓글을 조회하는 기능")
 	@ApiImplicitParams({
 		@ApiImplicitParam(name="postId", value="게시물ID", required = true, dataTypeClass = Long.class, paramType = "path", defaultValue = "1"),
+		@ApiImplicitParam(name="delYn", value="삭제여부", required = false, dataTypeClass = String.class, paramType = "query")
 	})		
 	@ApiResponses({@ApiResponse(response = CommentResponse.class, code = 200, message = "OK")})
 	@GetMapping(path = "/get/{postId}")
-	public CommentResponse selectPostId( @PathVariable Long postId) throws Exception {
+	public CommentResponse selectPostId( @PathVariable Long postId, @RequestParam(required = false) String delYn) throws Exception {
 
-		logger.info("postId =>" + postId);
+		logger.info("postId =>" + postId + " delYn =>" + delYn);
 		
 		CommentResponse response = new CommentResponse();
 		
-		List<Comment> listComment = commentService.getCommentByPostId(postId);
+		List<Comment> listComment = commentService.getCommentByPostId(postId, delYn);
 		
     	if ( listComment.isEmpty() ) {
     		response.setResponseCode(ResponseCode.IS_EMPTY);

@@ -1,3 +1,8 @@
+const enter = () =>{
+	if(event.keyCode==13){
+		login();
+	}
+}
 const login = () =>{
 	
 	var user = {
@@ -17,6 +22,8 @@ const login = () =>{
 				alert('로그인 성공');
 				$(opener.location).attr("href", "javascript:setLogin();");
 				window.close();
+			} else {
+				alert(data.resultMsg);
 			}
         }, // success 
 

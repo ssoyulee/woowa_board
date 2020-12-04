@@ -1,9 +1,9 @@
-let post_app;
+let postApp;
 
 $(function() {
 
-	post_app = new Vue({
-		el: '#post_app',
+	postApp = new Vue({
+		el: '#postApp',
 	  	data : {
 			post : {
 		      		postId : null,
@@ -16,9 +16,9 @@ $(function() {
 		},
 		methods : {
 	
-			post_insert : () => {
+			insertPost : () => {
 				
-				post_app.post.postContent = $("#summernote").summernote("code");
+				postApp.post.postContent = $("#summernote").summernote("code");
 				
 			    $.ajax({
 			        cache : false,
@@ -26,11 +26,11 @@ $(function() {
 			        type : "POST", 
 					dataType : "json",
 					contentType: "application/json",
-			        data : JSON.stringify(post_app.post), 
+			        data : JSON.stringify(postApp.post), 
 			        success : function(data) {
 			            if ( data.resultCode == '00' ) {
 							alert('글쓰기 성공');
-							location.href = "/board/index?boardId=" + post_app.post.boardId;
+							location.href = "/board/index?boardId=" + postApp.post.boardId;
 						}
 			        }, // success 
 			
@@ -40,21 +40,21 @@ $(function() {
 			    }); // $.ajax */
 			},
 			
-			post_update : () => {
+			updatePost : () => {
 				
-				post_app.post.postContent = $("#summernote").summernote("code");
+				postApp.post.postContent = $("#summernote").summernote("code");
 				
 			    $.ajax({
 			        cache : false,
-			        url : "/post/api/update/"+post_app.post.postId, // 요기에
+			        url : "/post/api/update/"+postApp.post.postId, // 요기에
 			        type : "PUT", 
 					dataType : "json",
 					contentType: "application/json",
-			        data : JSON.stringify(post_app.post), 
+			        data : JSON.stringify(postApp.post), 
 			        success : function(data) {
 			            if ( data.resultCode == '00' ) {
 							alert('게시물 수정 성공');
-							location.href = "/board/index?boardId=" + post_app.post.boardId;
+							location.href = "/board/index?boardId=" + postApp.post.boardId;
 						}
 			        }, // success 
 			
@@ -74,20 +74,20 @@ $(function() {
 		focus: true                  // set focus to editable area after initializing summernote
 	});	
 	
-	if (p_postId){
+	if (reqPostId){
    		 $.ajax({
 	        cache : false,
-	        url : "/post/api/get/" + p_postId, // 요기에
+	        url : "/post/api/get/" + reqPostId, // 요기에
 	        type : "GET", 
 			contentType: "application/json", 
 	        success : function(data) {
 	            if ( data.resultCode == '00' ) {
 					let _post = data.resultList[0]
-					post_app.post.postId = _post.postId;
-					post_app.post.boardId = _post.boardId;
-					post_app.post.postTitle = _post.postTitle;
-					post_app.post.postContent = _post.postContent;  
-					$("#summernote").summernote("code", post_app.post.postContent);
+					postApp.post.postId = _post.postId;
+					postApp.post.boardId = _post.boardId;
+					postApp.post.postTitle = _post.postTitle;
+					postApp.post.postContent = _post.postContent;  
+					$("#summernote").summernote("code", postApp.post.postContent);
 				}
 	        }, // success 
 	
@@ -96,9 +96,19 @@ $(function() {
 	        }
 	    }); // $.ajax */
 	} else {
-		post_app.post.boardId = p_boardId;
-		post_app.post.userId = header_app.login_id
+		postApp.post.boardId = reqBoardId;
+		postApp.post.userId = headerApp.loginId
 	}
+	
+	$('#headerApp').on('DOMSubtreeModified', '#heardLogin', function(){
+		postApp.loginId = headerApp.loginId;
+		postApp.role = headerApp.role;
+		if (!postApp.loginId){
+			alert('로그인 정보가 존재하지 않아 게시판으로 이동합니다.');
+			location.href = "/board/index?boardId=" + postApp.post.boardId;	
+		}
+	});
+	
 });
 
 

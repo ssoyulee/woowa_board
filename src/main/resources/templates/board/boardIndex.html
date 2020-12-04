@@ -11,40 +11,40 @@
     -->
     <!-- index.html 고유 스크립트 추가 -->
     <th:block layout:fragment="script">
-        <script th:src="@{/static/js/board/board_index.js}"></script>
+        <script th:src="@{/static/js/board/boardIndex.js}"></script>
 		<script>
-			let p_boardId = "[[${boardId}]]";
+			let reqBoardId = "[[${boardId}]]";
 		</script>
     </th:block>
 
     <div layout:fragment="content">
-	    <div id="board_app">
+	    <div id="boardApp">
 	    	<div class="container">
 	    		<div class="row">
 	    			<div class="col">
 				    	<br>
-					    <h1 class="text-center">{{board.explanation}}</h1>
+					    <h3 class="text-left">{{board.explanation}}</h3>
 					    <br>
 					</div>
 				</div>
-	    		<div class="row">
+	    		<div v-if="loginId" class="row m-1">
 	    			<div class="col" style="text-align:right">				
-					    <button class="btn btn-primary" type ="button" v-on:click="go_insert_page">글쓰기</button>
+					    <button class="btn btn-sm btn-secondary" type ="button" v-on:click="goInsertPage">글쓰기</button>
 					</div>
 				</div>
 	    		<div class="row">
 	    			<div class="col">								
-				        <table class="table">
+				        <table class="table" style="text-align: center;">
 				        	<thead>
 				        		<tr>
-				        			<th>번호</th>
-				        			<th>제목</th>
-				        			<th>작성자</th>
-				        			<th>게시시간</th>
-				        			<th>수정시간</th>
+				        			<th width="10%">번호</th>
+				        			<th width="40%">제목</th>
+				        			<th width="10%">작성자</th>
+				        			<th width="20%">게시시간</th>
+				        			<th width="20%">수정시간</th>
 				        		</tr>
 				        	</thead>
-						    <tr v-for="post in post_list">
+						    <tr v-for="post in postList">
 						    	<td>{{ post.postId }}</td>
 						    	<td><a :href=post.url>{{ post.postTitle }}</a></td>
 						    	<td>{{ post.regpeId }}</td>
@@ -57,9 +57,9 @@
 	    		<div class="row">
 	    			<div class="col">
 						<ul class="pagination justify-content-center">
-							<li class="page-item"><a class="page-link" href="#">Previous</a></li>
-							<li class="page-item"><a class="page-link" href="#">1</a></li>
-							<li class="page-item"><a class="page-link" href="#">Next</a></li>
+							<li class="page-item"><a class="page-link" href="#" v-on:click="prevPage">Previous</a></li>
+							<li class="page-item"><a class="page-link" href="#">{{page}}</a></li>
+							<li class="page-item"><a class="page-link" href="#" v-on:click="nextPage">Next</a></li>
 						</ul>
 	    			</div>
 	    		</div>

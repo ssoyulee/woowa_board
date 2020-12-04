@@ -4,10 +4,7 @@ import java.time.LocalDateTime;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.SequenceGenerator;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -16,9 +13,11 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 @Getter
 @Setter
+@ToString
 @NoArgsConstructor
 @Entity(name = "user")
 public class User {
@@ -41,6 +40,9 @@ public class User {
 	
 	@Column(name="role")
 	private String role;	
+	
+	@Column(name="session_id")
+	private String sessionId;	
 	
 	@Column(name="del_yn")
 	private String delYn;

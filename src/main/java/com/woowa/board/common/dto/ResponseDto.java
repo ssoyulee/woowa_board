@@ -13,6 +13,10 @@ import lombok.ToString;
 @ToString
 public class ResponseDto {
 
+	private Integer totalPage;
+	
+	private Long totalCount;
+	
 	private String resultCode;
 	
 	private String resultMessage;

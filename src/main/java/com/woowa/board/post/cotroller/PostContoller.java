@@ -15,7 +15,7 @@ public class PostContoller {
 		
 		model.addAttribute("boardId", boardId);
 		model.addAttribute("postId", postId);
-		return "post/post_detail";
+		return "post/postDetail";
 	}
 
 	@RequestMapping(path = "/form")
@@ -23,7 +23,7 @@ public class PostContoller {
 		
 		model.addAttribute("boardId", boardId);
 		model.addAttribute("postId", postId);
-		return "post/post_form";
+		return "post/postForm";
 	}
 	
 }

@@ -61,7 +61,6 @@ public class BoardRestController {
 		return response;
 	}
     
-	
 	@ApiOperation(value = "게시판 정보 조회", notes = "게시판 번호로 게시판을 조회하는 기능")
 	@ApiImplicitParams({
 		@ApiImplicitParam(name="boardId", value="게시판ID", required = true, dataTypeClass = Long.class, paramType = "path", defaultValue = "1"),

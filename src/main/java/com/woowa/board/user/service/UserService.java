@@ -34,7 +34,12 @@ public class UserService {
 		return user;
 	}
 	
-
+	public Optional<User> getUserByUserIdAndPassword(String userId, String password) throws Exception {
+		
+		Optional<User> user = userRepository.findByUserIdAndPassword(userId,password);
+		return user;
+	}
+	
 	@Transactional
 	public void insert(UserRequest userRequest) throws Exception {
 		

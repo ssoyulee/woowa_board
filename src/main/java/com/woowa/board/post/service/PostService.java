@@ -8,8 +8,13 @@ import javax.transaction.Transactional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 
+import com.woowa.board.board.dao.Board;
 import com.woowa.board.post.dao.Post;
 import com.woowa.board.post.dao.PostRepository;
 import com.woowa.board.post.vo.PostRequest;
@@ -41,6 +46,15 @@ public class PostService {
 		
 		return list_post;
 	}
+
+	public Page<Post> findAllByBoardIdAndDelYn(Long boardId, Integer page, Integer pageCount) throws Exception {
+		
+		String delYn = "N";			// 지워지지 않은 게시물만 가져온다.
+		Pageable pa = PageRequest.of(page-1, pageCount, Direction.DESC, "postId");
+		return postRepository.findAllByBoardIdAndDelYn(boardId, delYn, pa);	
+		
+	}
+	
 	
 	public Optional<Post> selectPostById(Long postId) throws Exception {
 		

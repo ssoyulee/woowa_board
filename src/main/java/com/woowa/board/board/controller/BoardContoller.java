@@ -15,7 +15,7 @@ public class BoardContoller {
 	public String index(@RequestParam Long boardId, Model model) throws Exception {
 
 		model.addAttribute("boardId", boardId);
-		return "board/board_index";
+		return "board/boardIndex";
 	}
 	
 }
