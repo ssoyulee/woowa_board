@@ -11,9 +11,11 @@ $(function() {
 		},
 		methods : {
 			selectBoardList : () => {
+				let param = {'delYn':'N'};
 				$.ajax({
 				    url: "/board/api/list",
 				    type: "GET",
+					data : param,
 				    dataType: "json",
 				    success: function(result){
 						if ( result.resultCode == '00' ){

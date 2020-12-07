@@ -10,7 +10,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	private static final String[] AUTH_LIST = {
 	    "/h2-console/**","/index","/static/**","/fragment/**","/layout/**","/user/**","/board/**","/post/**","/comment/**",
 	    "/swagger-ui.html","/v2/api-docs", "/swagger-resources/**","/webjars/**","/swagger/**",
-	    "/mail/**", "/hacker/**", "/favicon.ico"
+	    "/mail/**", "/hacker/**", "/favicon.ico",
+	    "/admin/**"
 	};
 	
     @Override
@@ -25,7 +26,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
 	            .csrf()
 //	                .ignoringAntMatchers("/h2-console/**")
-	            .ignoringAntMatchers(AUTH_LIST)
+	                .ignoringAntMatchers(AUTH_LIST)
 	            .and()
 	            .headers()
 	                .frameOptions()

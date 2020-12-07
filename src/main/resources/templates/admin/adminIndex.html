@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout/default">
+	
+    <!-- index.html 고유 스크립트 추가 -->
+    <th:block layout:fragment="script">
+        <script th:src="@{/static/js/admin/adminIndex.js}"></script>
+    </th:block>
+
+    <div layout:fragment="content">
+		<div class="row">
+			<div class="col-12">
+				<br>
+				<h4 class="text-left">관리자 페이지</h4>
+				<br>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-2">
+				<div class="nav flex-column nav-pills" id="manageTab" role="tablist" aria-orientation="vertical">
+					<a class="nav-link active" id="manageUserTab" data-toggle="pill" href="#" role="tab" aria-selected="true">사용자관리</a>
+					<a class="nav-link" id="manageBoardTab" data-toggle="pill" href="#" role="tab" aria-selected="false">게시판관리</a>
+					<a class="nav-link" id="managePostTab" data-toggle="pill" href="#" role="tab" aria-selected="false">게시물관리</a>
+					<a class="nav-link" id="manageCommentTab" data-toggle="pill" href="#" role="tab" aria-selected="false">댓글관리</a>
+				</div>
+			</div>
+			<div class="col-10">
+				<div class="tab-content" id="tabContent">
+				</div>
+			</div>
+		</div>
+	</div>
+    
+</html>

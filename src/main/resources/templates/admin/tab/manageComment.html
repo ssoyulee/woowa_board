@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+	<th:block layout:fragment="script">
+        <script th:src="@{/static/js/admin/tab/manageComment.js}"></script>
+    </th:block>
+	<div id="manageCommentApp">
+   		<div class="row" style="border-bottom: 1px solid #bcbcbc;">
+   			<div class= "col-3">
+		   		<h5>댓글 리스트</h5>
+	   		</div>
+   		</div>
+   		<br>		
+   		<div class="row">
+   			<div class="col">
+		        <table class="table table-sm">
+		        	<thead class="thead-light">
+		        		<tr>
+		        			<th style="width:10%">ID</th>
+		        			<th style="width:30%">게시물번호</th>
+		        			<th style="width:40%">코멘트</th>
+		        			<th style="width:10%">삭제여부</th>
+		        			<th style="width:10%"></th>
+		        		</tr>
+		        	</thead>
+				    <tr v-for="comment in commentList">
+				    	<td>{{ comment.commentId }}</td>
+				    	<td>{{ comment.postId }}</td>
+				    	<td>{{ comment.commentContent }}</td>
+				    	<td>{{ comment.delYn }}</td>
+				    	<td>
+				    		<button class="btn btn-sm btn-outline-secondary" type ="button" v-on:click="deleteComment(comment.commentId) ">삭제</button>
+				    	</td>				    	
+				    </tr>        	
+		        </table>   			
+   			</div>
+   		</div>
+	</div>
