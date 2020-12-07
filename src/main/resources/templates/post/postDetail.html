@@ -21,21 +21,18 @@
 	    <div id="postDetailApp">
 			<div class="container">
 				<br>
-				<!-- 
-	    		<div v-if="role==='ADMIN' or userId===post.regpeId" class="row">
-	    		 -->
-	    		 
-				<div v-if="loginId===post.regpeId" class="row m-1">
-	    			<div class="col-md-12" style="text-align:right;">				
+				<div v-if="loginId===post.regpeId || role==='ADMIN'" class="row">
+	    			<div class="col" style="text-align:right;">				
 					    <button class="btn btn-sm btn-outline-secondary" type ="button" v-on:click="goUpdatePage">수정</button>
 					    <button class="btn btn-sm btn-outline-secondary" type ="button" v-on:click="deletePost">삭제</button>
 					</div>
 				</div>
+				<br>
 				<div class="row border">
 					<div class= "col-2" style="background:#ececec">
 						<label>No.</label>
 					</div>
-					<div class= col-4>
+					<div class= "col-10">
 						<label>{{post.postId}}</label>
 					</div>		
 				</div>									
@@ -43,13 +40,13 @@
 					<div class= "col-2" style="background:#ececec">
 						<label>작성자</label>
 					</div>				
-					<div class= col-4>
+					<div class= "col-4">
 						<label>{{post.regpeId}}</label>
 					</div>					
 					<div class= "col-2" style="background:#ececec">
 						<label>작성일</label>
 					</div>
-					<div class= col-4>
+					<div class= "col-4">
 						<label>{{post.regDts}}</label>
 					</div>					
 	
@@ -67,7 +64,7 @@
 					<div class= "col-2" style="background:#ececec">
 						<label>내용</label>
 					</div>										
-					<div class="col-10 ">
+					<div class="col-10">
 						<div v-html=post.postContent></div>
 					</div>
 				</div>				
@@ -82,7 +79,7 @@
 					<div class="col-11">
 				    	<textarea rows="3" class="col-12" v-model=newComment></textarea>						
 					</div>
-					<div>
+					<div class="col-1">
 						<button class="btn btn-sm btn-secondary" type ="button" v-on:click="insertComment">등록</button>
 					</div>
 				</div>

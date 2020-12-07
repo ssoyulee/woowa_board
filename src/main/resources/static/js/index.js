@@ -4,17 +4,17 @@ $(function() {
 	app = new Vue({
 	  	el: '#app',
 	  	data : {
-			hacker_news: [],
+			hackerNews: [],
 		},
 		methods : {
-			select_hacker_news : function(){
+			selectHackerNews : () => {
 				$.ajax({
 				    url: "/hacker/api/select",
 				    type: "GET",
 				    dataType: "json",
 				    success: function(data){
 						if ( data.resultCode == '00' ){
-					    	app.hacker_news = data.listHacker;
+					    	app.hackerNews = data.listHacker;
 						}else{
 							alert(data.resultMessage);
 						}
@@ -31,7 +31,7 @@ $(function() {
 		
 	});
 	
-	app.select_hacker_news();
+	app.selectHackerNews();
 	
 });
 
