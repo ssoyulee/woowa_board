@@ -34,14 +34,18 @@ public class HacekerService {
     	int index = 0;
     	List<Hacker> topNewsList = new ArrayList<Hacker>();
     	for ( Integer newsId : listTopNews ) {
-    		if (index ++ > 9) {
-    			break;
-    		}
-    		String newsUrl = "https://hacker-news.firebaseio.com/v0/item/"+newsId+".json?print=pretty";
-    		Hacker news = restTemplate.getForObject(newsUrl, Hacker.class);
-    		
-    		topNewsList.add(news);
-    		logger.info("news => " + news);
+    		try {
+	    		if (index ++ > 9) {
+	    			break;
+	    		}
+	    		String newsUrl = "https://hacker-news.firebaseio.com/v0/item/"+newsId+".json?print=pretty";
+	    		Hacker news = restTemplate.getForObject(newsUrl, Hacker.class);
+	    		
+	    		topNewsList.add(news);
+	    		logger.info("news => " + news);
+    		}catch (Exception e) {
+    			logger.error("error => " + e.getMessage());
+			}
 
     	}
     	
