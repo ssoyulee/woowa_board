@@ -7,10 +7,14 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
+
+import com.woowa.board.user.dao.User;
 
 import lombok.Builder;
 import lombok.Getter;
@@ -63,6 +67,10 @@ public class Post {
 	@Column(name="mod_dts")
 	@UpdateTimestamp
 	private LocalDateTime modDts;
+
+	@ManyToOne
+	@JoinColumn(name="regpe_id", referencedColumnName="user_id", insertable=false, updatable=false)
+	private User user;
 	
 	@Builder
 	public Post(Long boardId, String postTitle, String postContent, String explanation, String delYn, String regpeId, String modpeId) {

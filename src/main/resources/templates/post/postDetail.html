@@ -30,11 +30,17 @@
 				<br>
 				<div class="row border">
 					<div class= "col-2" style="background:#ececec">
-						<label>No.</label>
+						<label>글번호</label>
 					</div>
-					<div class= "col-10">
+					<div class= "col-4">
 						<label>{{post.postId}}</label>
-					</div>		
+					</div>
+					<div class= "col-2" style="background:#ececec">
+						<label>작성일</label>
+					</div>
+					<div class= "col-4">
+						<label>{{post.regDts}}</label>
+					</div>						
 				</div>									
 				<div class="row border">
 					<div class= "col-2" style="background:#ececec">
@@ -42,19 +48,18 @@
 					</div>				
 					<div class= "col-4">
 						<label>{{post.regpeId}}</label>
-					</div>					
+					</div>						
 					<div class= "col-2" style="background:#ececec">
-						<label>작성일</label>
+						<label>랭킹</label>
 					</div>
 					<div class= "col-4">
-						<label>{{post.regDts}}</label>
+						<label>Rank.{{post.user.ranking}}</label>
 					</div>					
-	
 				</div>
 				
 				<div class="row border">
 					<div class= "col-2" style="background:#ececec">
-						<label>글 제목</label>
+						<label>제목</label>
 					</div>								
 					<div class="col-10">
 					    <label>{{post.postTitle}}</label>
@@ -88,7 +93,7 @@
 					<br>
 					<div class="row">
 						<div class="col">
-							<b style="color:gray;">{{comment.regpeId}} 님</b>
+							<b style="color:gray;">{{comment.regpeId}} (Rank.{{comment.user.ranking}})</b>  님의 댓글 :
 						</div>
 					</div>
 					<div v-if="loginId===comment.regpeId || role==='ADMIN'" class="row">

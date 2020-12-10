@@ -9,7 +9,7 @@ $(function() {
 			postList : [],
 			loginId : headerApp.loginId,
 			page : 1,
-			pageCount : 3,
+			pageCount : 5,
 			totalPage : 0,
 			totalCount : 0
 		},
