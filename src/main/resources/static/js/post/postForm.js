@@ -31,6 +31,8 @@ $(function() {
 			            if ( data.resultCode == '00' ) {
 							alert('글쓰기 성공');
 							location.href = "/board/index?boardId=" + postApp.post.boardId;
+						}else{
+							alert(data.resultMessage);
 						}
 			        }, // success 
 			
@@ -55,6 +57,8 @@ $(function() {
 			            if ( data.resultCode == '00' ) {
 							alert('게시물 수정 성공');
 							location.href = "/board/index?boardId=" + postApp.post.boardId;
+						}else{
+							alert(data.resultMessage);
 						}
 			        }, // success 
 			
@@ -88,6 +92,8 @@ $(function() {
 					postApp.post.postTitle = _post.postTitle;
 					postApp.post.postContent = _post.postContent;  
 					$("#summernote").summernote("code", postApp.post.postContent);
+				}else{
+					alert(data.resultMessage);
 				}
 	        }, // success 
 	
@@ -104,7 +110,7 @@ $(function() {
 		postApp.loginId = headerApp.loginId;
 		postApp.role = headerApp.role;
 		if (!postApp.loginId){
-			alert('로그인 정보가 존재하지 않아 게시판으로 이동합니다.');
+//			alert('로그인 정보가 존재하지 않아 게시판으로 이동합니다.');
 			location.href = "/board/index?boardId=" + postApp.post.boardId;	
 		}
 	});

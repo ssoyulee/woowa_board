@@ -1,5 +1,6 @@
 package com.woowa.board.post.dao;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.data.domain.Page;
@@ -14,4 +15,5 @@ public interface PostRepository extends JpaRepository<Post, Long>{
 	
 	Page<Post> findAllByBoardIdAndDelYn(Long boardId, String delYn, Pageable page);
 	
+	List<Post> findByRegpeIdAndRegDtsBetween(String regpeId, LocalDateTime startDt, LocalDateTime endDt);
 }
