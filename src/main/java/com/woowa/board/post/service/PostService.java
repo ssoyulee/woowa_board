@@ -87,7 +87,7 @@ public class PostService {
 	
 	public boolean stopword(String content) {
 
-        Pattern p = Pattern.compile("배달통|요기요|쿠팡잇츠|위메프오|배고파", Pattern.CASE_INSENSITIVE);
+        Pattern p = Pattern.compile("네이버|다음|카카오", Pattern.CASE_INSENSITIVE);
         Matcher m = p.matcher(content);
         
         return m.find();
