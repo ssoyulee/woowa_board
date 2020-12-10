@@ -1,6 +1,7 @@
 package com.woowa.board.comment.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import javax.transaction.Transactional;
 
@@ -12,11 +13,26 @@ import org.springframework.stereotype.Service;
 import com.woowa.board.comment.dao.Comment;
 import com.woowa.board.comment.dao.CommentRepository;
 import com.woowa.board.comment.vo.CommentRequest;
+import com.woowa.board.noti.service.MailService;
+import com.woowa.board.noti.vo.RequestMail;
+import com.woowa.board.post.dao.Post;
+import com.woowa.board.post.service.PostService;
+import com.woowa.board.user.dao.User;
+import com.woowa.board.user.service.UserService;
 
 @Service
 public class CommentService {
 
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
+	
+	@Autowired
+	private MailService mailService; 
+	
+	@Autowired
+	private UserService userService;
+	
+	@Autowired
+	private PostService postService;
 	
 	@Autowired
 	private CommentRepository commentRepository;
@@ -46,7 +62,16 @@ public class CommentService {
 	@Transactional
 	public void insert(CommentRequest insertComment) throws Exception {
 		
-		// TODO : POSTID가 존재하는지 확인하자
+		// 이메일을 전송한다.
+		Post post = postService.selectPostById(insertComment.getPostId()).orElseThrow(() -> new IllegalArgumentException("해당 게시글이 없습니다. postId =" + insertComment.getPostId()));
+		User user = userService.getUserById(post.getRegpeId()).orElseThrow(() -> new IllegalArgumentException("해당 사용자가 없습니다. userId =" + post.getRegpeId()));
+		
+		RequestMail requestMail = RequestMail.builder()
+									.address(user.getEmail())
+									.title("[알림] 댓글 등록 알림")
+									.message("작성하신 게시글에 댓글이 등록되었습니다")
+									.build();
+		mailService.sendMail(requestMail);
 		
 		Comment comment = Comment.builder()
 						.postId(insertComment.getPostId())		
