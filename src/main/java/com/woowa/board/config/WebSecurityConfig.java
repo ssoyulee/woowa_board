@@ -24,7 +24,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	    "/h2-console/**","/index","/static/**","/fragment/**","/layout/**","/user/**","/board/**","/post/**","/comment/**",
 	    "/swagger-ui.html","/v2/api-docs", "/swagger-resources/**","/webjars/**","/swagger/**",
 	    "/mail/**", "/hacker/**", "/favicon.ico"
-//	    "/admin/**"
 	};
 	
 	private static final String[] ADMIN_AUTH_LIST = {
@@ -58,21 +57,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	            .logout()
 	            	.logoutUrl("/user/logout")
 	            	;
-	            	
-        
-//                    .addHeaderWriter(
-//                        new XFrameOptionsHeaderWriter(
-//                            new WhiteListedAllowFromStrategy(Arrays.asList("localhost"))    // 여기!
-//                        )
-//                    );
-//                .formLogin()
-//                    .loginPage("어쩌구")
-//                    .defaultSuccessUrl("저쩌구")
-//                    .permitAll()
-//                .and()
-//                .logout()
-//                    .logoutSuccessUrl("얼씨구")
-//                    .permitAll();
     }
     
     @Bean
