@@ -1,6 +1,7 @@
 package com.woowa.board.user.controller;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.woowa.board.common.code.ResponseCode;
 import com.woowa.board.common.dto.ResponseDto;
+import com.woowa.board.post.dao.Post;
 import com.woowa.board.user.dao.UserAccount;
 import com.woowa.board.user.service.UserService;
 import com.woowa.board.user.vo.UserRequest;
@@ -41,6 +43,8 @@ public class UserRestController {
 	@GetMapping("/list")
 	public UserResponse select() throws Exception {
 		
+		log.info("select");
+		
 		UserResponse response = new UserResponse();
 		
 		List<UserAccount> listUser = userService.select();
@@ -64,16 +68,15 @@ public class UserRestController {
 	@GetMapping(path = "/get/{userId}")
 	public UserResponse getUser( @PathVariable String userId) throws Exception {
 
-		log.info("userId =>" + userId);
+		log.info("getUser ::: userId = > {}", userId);
 		
 		UserResponse response = new UserResponse();
 		
 		Optional<UserAccount> user = userService.getUserById(userId);
 		
     	if ( user.isPresent() ) {
+    		List<UserAccount> listUser = Arrays.asList(user.get());
     		response.setResponseCode(ResponseCode.SUCCESS);
-    		List<UserAccount> listUser = new ArrayList<UserAccount>();
-    		listUser.add(user.get());
     		response.setResultList(listUser);
     	} else {
     		response.setResponseCode(ResponseCode.IS_EMPTY);
@@ -86,9 +89,9 @@ public class UserRestController {
 	@ApiOperation(value = "사용자 정보 입력", notes = "사용자 정보를 입력한다.")
 	@ApiResponses({@ApiResponse(response = ResponseDto.class, code = 200, message = "OK")})
 	@PostMapping(path = "/insert")
-	public ResponseDto insertPost(@RequestBody UserRequest insertUser) throws Exception {
+	public ResponseDto insertUser(@RequestBody UserRequest insertUser) throws Exception {
 
-		log.info("insertUser =>" + insertUser);
+		log.info("insertUser ::: start");
 		
 		ResponseDto response = new ResponseDto();
 
@@ -110,10 +113,9 @@ public class UserRestController {
 	})		
 	@ApiResponses({@ApiResponse(response = ResponseDto.class, code = 200, message = "OK")})
 	@PutMapping(path = "/update/{userId}")
-	public ResponseDto updateComment(@PathVariable String userId, @RequestBody UserRequest updateUser) throws Exception {
+	public ResponseDto updateUser(@PathVariable String userId, @RequestBody UserRequest updateUser) throws Exception {
 
-		log.info("userId =>" + userId);
-		log.info("updateUser =>" + updateUser.toString());
+		log.info("updateUser ::: userId = > {}", userId);
 
 		ResponseDto response = new ResponseDto();
 		
@@ -137,7 +139,7 @@ public class UserRestController {
 	@DeleteMapping(path = "/delete/{userId}")
 	public ResponseDto deleteUser(@PathVariable String userId) throws Exception {
 
-		log.info("userId =>" + userId);
+		log.info("deleteUser ::: userId = > {}", userId);
 		
 		ResponseDto response = new ResponseDto();
 		

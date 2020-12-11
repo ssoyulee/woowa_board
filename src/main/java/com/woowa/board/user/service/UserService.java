@@ -55,7 +55,7 @@ public class UserService {
 
 		userRepository.save(user);
 
-		log.info("success insertUser => " + user);
+		log.info("insert ::: user insert success ::: user = > {}", user);
 				
 	}
 	
@@ -72,7 +72,7 @@ public class UserService {
 		
 		userRepository.save(user);
 		
-		log.info("success updateUser => " + user);
+		log.info("update ::: user update success ::: user = > {}", user);
 		
 	}
 	
@@ -84,7 +84,7 @@ public class UserService {
 		user.setSessionId(sessionId);
 		userRepository.save(user);
 		
-		log.info("success updateUser => " + user);
+		log.info("updateSession ::: user update success ::: user = > {}", user);
 		
 	}
 	
@@ -97,7 +97,7 @@ public class UserService {
 		
 		userRepository.save(user);
 
-		log.info("success deleteUser => " + userId);
+		log.info("delete ::: user delete success ::: userId = > {}", userId);
 		
 	}
 }

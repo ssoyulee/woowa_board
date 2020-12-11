@@ -32,7 +32,8 @@ public class UserServiceSecurity implements UserDetailsService {
 
 		UserAccount user = userRepository.findById(userId).orElseThrow(() -> new IllegalArgumentException("해당 사용자가 없습니다. userId=" + userId));
 		
-		log.info("user Role => {}", user.getRole().getValue());
+		log.info("loadUserByUsername ::: userId = > {} userRole = > {}", userId, user.getRole().getValue());
+		
 		List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
 		authorities.add(new SimpleGrantedAuthority(user.getRole().getValue()));
 		
