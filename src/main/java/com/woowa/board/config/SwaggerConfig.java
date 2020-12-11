@@ -23,7 +23,6 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @EnableSwagger2
 public class SwaggerConfig {
 
-    
 	private ApiInfo apiInfo() {
 
 		return new ApiInfoBuilder()
@@ -33,11 +32,6 @@ public class SwaggerConfig {
 				.build();
 	}
 
-//	@Bean
-//	public Docket api() {
-//		return new Docket(DocumentationType.SWAGGER_2).select().apis(RequestHandlerSelectors.any())
-//				.paths(PathSelectors.any()).build();
-//	}
 	
 	@Bean
 	public Docket boardApi() {
@@ -53,13 +47,10 @@ public class SwaggerConfig {
 	            .build());
 	    
 		return new Docket(DocumentationType.SWAGGER_2)
-//                .consumes(getConsumeContentTypes())
-//                .produces(getProduceContentTypes())	
 				.useDefaultResponseMessages(false)
 				.groupName("com.woowa")
 				.apiInfo(this.apiInfo())
 				.select()
-//				.apis(RequestHandlerSelectors.basePackage("com.woowa.board.board"))
 				.apis(RequestHandlerSelectors.any())
 				.paths(PathSelectors.ant("/**/api/**"))
 				.build()

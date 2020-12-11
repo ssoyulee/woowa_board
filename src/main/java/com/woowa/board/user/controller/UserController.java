@@ -7,8 +7,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
@@ -21,11 +19,12 @@ import com.woowa.board.user.dao.User;
 import com.woowa.board.user.service.UserService;
 import com.woowa.board.user.vo.UserRequest;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @Controller
 @RequestMapping(path = "/user")
 public class UserController {
-
-	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
 	@Autowired
 	private UserService userService;
@@ -92,7 +91,7 @@ public class UserController {
 		Cookie[] cookies = request.getCookies();
 		for(Cookie cookie : cookies) {
 			if ( cookie.getName().equals("userId") || cookie.getName().equals("role") || cookie.getName().equals("ssId")) {
-				logger.info(cookie.getValue());
+				log.info(cookie.getValue());
 				cookie.setPath("/");
 				cookie.setMaxAge(0);
 				response.addCookie(cookie);

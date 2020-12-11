@@ -3,33 +3,28 @@ package com.woowa.board.hacker.service;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import com.woowa.board.hacker.vo.Hacker;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @Service
 public class HacekerService {
-
-	private final Logger logger = LoggerFactory.getLogger(this.getClass());
-
+	
+	@Autowired
 	private RestTemplate restTemplate;
 	
 	private static final String TOP_NEWS_URL = "https://hacker-news.firebaseio.com/v0/newstories.json?print=pretty";
 	
-    @Autowired
-    public HacekerService(RestTemplate restTemplate) {
-        this.restTemplate = restTemplate;
-    }
-    
     public List<Hacker> selectNewstories() {
     	
     	List<Integer> listTopNews = restTemplate.getForObject(TOP_NEWS_URL, List.class);
     	
-    	logger.info("response = > " + listTopNews.size());
+    	log.info("response = > " + listTopNews.size());
     	
     	int index = 0;
     	List<Hacker> topNewsList = new ArrayList<Hacker>();
@@ -42,9 +37,9 @@ public class HacekerService {
 	    		Hacker news = restTemplate.getForObject(newsUrl, Hacker.class);
 	    		
 	    		topNewsList.add(news);
-	    		logger.info("news => " + news);
+	    		log.info("select news => {}", news);
     		}catch (Exception e) {
-    			logger.error("error => " + e.getMessage());
+    			log.error("newsId => {} error => {}", newsId, e.getMessage());
 			}
 
     	}

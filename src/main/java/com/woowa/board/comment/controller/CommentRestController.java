@@ -2,8 +2,6 @@ package com.woowa.board.comment.controller;
 
 import java.util.List;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -27,12 +25,12 @@ import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 @RestController
 @RequestMapping(path = "/comment/api")
 public class CommentRestController {
-
-	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
 	@Autowired
 	private CommentService commentService;
@@ -70,7 +68,7 @@ public class CommentRestController {
 	@GetMapping(path = "/get/{postId}")
 	public CommentResponse selectPostId( @PathVariable Long postId, @RequestParam(required = false) String delYn) throws Exception {
 
-		logger.info("postId =>" + postId + " delYn =>" + delYn);
+		log.info("postId =>" + postId + " delYn =>" + delYn);
 		
 		CommentResponse response = new CommentResponse();
 		
@@ -92,7 +90,7 @@ public class CommentRestController {
 	@PostMapping(path = "/insert")
 	public ResponseDto insertPost(@RequestBody CommentRequest insertComment) throws Exception {
 
-		logger.info("insertComment =>" + insertComment);
+		log.info("insertComment =>" + insertComment);
 		
 		ResponseDto response = new ResponseDto();
 
@@ -116,8 +114,8 @@ public class CommentRestController {
 	@PutMapping(path = "/update/{commentId}")
 	public ResponseDto updateComment(@PathVariable Long commentId, @RequestBody CommentRequest updateComment) throws Exception {
 
-		logger.info("commentId =>" + commentId);
-		logger.info("updateComment =>" + updateComment.toString());
+		log.info("commentId =>" + commentId);
+		log.info("updateComment =>" + updateComment.toString());
 
 		ResponseDto response = new ResponseDto();
 		
@@ -141,7 +139,7 @@ public class CommentRestController {
 	@DeleteMapping(path = "/delete/{commentId}")
 	public ResponseDto deleteComment(@PathVariable Long commentId) throws Exception {
 
-		logger.info("commentId =>" + commentId);
+		log.info("commentId =>" + commentId);
 		
 		ResponseDto response = new ResponseDto();
 		

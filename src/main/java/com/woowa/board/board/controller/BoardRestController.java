@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -29,12 +27,12 @@ import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 @RestController
 @RequestMapping("/board/api")
 public class BoardRestController {
-	
-	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 	
 	@Autowired
 	private BoardService boardService;
@@ -47,6 +45,8 @@ public class BoardRestController {
 	@GetMapping("/list")
 	public BoardResponse select(@RequestParam(required = false) String delYn) throws Exception {
 
+    	log.info("delYn =>" + delYn);
+    	
     	BoardResponse response = new BoardResponse();
 		
     	List<Board> listBoard = boardService.select(delYn);
@@ -69,7 +69,7 @@ public class BoardRestController {
 	@GetMapping(path = "/get/{boardId}")
 	public BoardResponse selectBoardId( @PathVariable Long boardId) throws Exception {
 
-		logger.info("boardId =>" + boardId);
+		log.info("boardId =>" + boardId);
 		
 		BoardResponse response = new BoardResponse();
 		
@@ -92,7 +92,7 @@ public class BoardRestController {
 	@PostMapping(path = "/insert")
 	public ResponseDto insertBoard(@RequestBody BoardRequest insertBoard) throws Exception {
 
-		logger.info("insertBoard =>" + insertBoard);
+		log.info("insertBoard =>" + insertBoard);
 		
 		ResponseDto response = new ResponseDto();
 
@@ -116,8 +116,8 @@ public class BoardRestController {
 	@PutMapping(path = "/update/{boardId}")
 	public ResponseDto updateBoard(@PathVariable Long boardId, @RequestBody BoardRequest updateBoard) throws Exception {
 
-		logger.info("boardId =>" + boardId);
-		logger.info("updateBoard =>" + updateBoard.toString());
+		log.info("boardId =>" + boardId);
+		log.info("updateBoard =>" + updateBoard.toString());
 
 		ResponseDto response = new ResponseDto();
 		
@@ -141,7 +141,7 @@ public class BoardRestController {
 	@DeleteMapping(path = "/delete/{boardId}")
 	public ResponseDto deleteBoard(@PathVariable Long boardId) throws Exception {
 
-		logger.info("boardId =>" + boardId);
+		log.info("boardId =>" + boardId);
 		
 		ResponseDto response = new ResponseDto();
 		

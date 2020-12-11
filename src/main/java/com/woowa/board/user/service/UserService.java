@@ -5,8 +5,6 @@ import java.util.Optional;
 
 import javax.transaction.Transactional;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,11 +12,12 @@ import com.woowa.board.user.dao.User;
 import com.woowa.board.user.dao.UserRepository;
 import com.woowa.board.user.vo.UserRequest;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @Service
 public class UserService {
 
-	private final Logger logger = LoggerFactory.getLogger(this.getClass());
-	
 	@Autowired
 	private UserRepository userRepository;
 	
@@ -56,7 +55,7 @@ public class UserService {
 
 		userRepository.save(user);
 
-		logger.info("success insertUser => " + user);
+		log.info("success insertUser => " + user);
 				
 	}
 	
@@ -73,7 +72,7 @@ public class UserService {
 		
 		userRepository.save(user);
 		
-		logger.info("success updateUser => " + user);
+		log.info("success updateUser => " + user);
 		
 	}
 	
@@ -85,7 +84,7 @@ public class UserService {
 		user.setSessionId(sessionId);
 		userRepository.save(user);
 		
-		logger.info("success updateUser => " + user);
+		log.info("success updateUser => " + user);
 		
 	}
 	
@@ -98,7 +97,7 @@ public class UserService {
 		
 		userRepository.save(user);
 
-		logger.info("success deleteUser => " + userId);
+		log.info("success deleteUser => " + userId);
 		
 	}
 }

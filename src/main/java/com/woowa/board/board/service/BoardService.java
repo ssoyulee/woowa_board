@@ -5,8 +5,6 @@ import java.util.Optional;
 
 import javax.transaction.Transactional;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,15 +12,18 @@ import com.woowa.board.board.dao.Board;
 import com.woowa.board.board.dao.BoardRepository;
 import com.woowa.board.board.vo.BoardRequest;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @Service
 public class BoardService {
 
-	private final Logger logger = LoggerFactory.getLogger(this.getClass());
-	
 	@Autowired
 	private BoardRepository boardRepository;
 	
 	public List<Board> select(String delYn) throws Exception {
+		
+		log.info("select delYn => " + delYn);
 		
 		if ( delYn != null && !delYn.isEmpty() ) {
 			return boardRepository.findAllByDelYn(delYn);	
@@ -32,6 +33,8 @@ public class BoardService {
 	}
 	
 	public Optional<Board> getBoardById(Long boardId) throws Exception {
+		
+		log.info("getBoardById boardId => " + boardId);
 		
 		Optional<Board> board = boardRepository.findById(boardId);
 
@@ -51,7 +54,7 @@ public class BoardService {
 
 		boardRepository.save(board);
 
-		logger.info("success insertBoard => " + insertBoard);
+		log.info("success insertBoard => " + insertBoard);
 		
 	}
 	
@@ -66,7 +69,7 @@ public class BoardService {
 
 		boardRepository.save(board);
 		
-		logger.info("success updateBoard => " + board);
+		log.info("success updateBoard => " + board);
 		
 	}
 	
@@ -79,7 +82,7 @@ public class BoardService {
 		
 		boardRepository.save(board);
 		
-		logger.info("success deleteBoard => " + boardId);
+		log.info("success deleteBoard => " + boardId);
 
 	}
 	

@@ -7,9 +7,11 @@ import com.woowa.board.user.dao.User;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 @Getter
 @Setter
+@ToString
 public class UserResponse extends ResponseDto{
 	
 	private List<User> resultList;

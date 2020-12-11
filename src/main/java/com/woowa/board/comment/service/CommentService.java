@@ -1,12 +1,9 @@
 package com.woowa.board.comment.service;
 
 import java.util.List;
-import java.util.Optional;
 
 import javax.transaction.Transactional;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,11 +17,12 @@ import com.woowa.board.post.service.PostService;
 import com.woowa.board.user.dao.User;
 import com.woowa.board.user.service.UserService;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @Service
 public class CommentService {
 
-	private final Logger logger = LoggerFactory.getLogger(this.getClass());
-	
 	@Autowired
 	private MailService mailService; 
 	
@@ -54,7 +52,7 @@ public class CommentService {
 		
 		List<Comment> list_comment = commentRepository.findAllByPostIdAndDelYnOrderByCommentIdDesc(postId, delYn);
 
-		logger.info("postId => "+ postId + " comment count => " + list_comment.size());
+		log.info("postId => "+ postId + " comment count => " + list_comment.size());
 		
 		return list_comment;
 	}
@@ -83,7 +81,7 @@ public class CommentService {
 
 		commentRepository.save(comment);
 
-		logger.info("success insertComment => " + insertComment);
+		log.info("success insertComment => " + insertComment);
 				
 	}
 	
@@ -97,7 +95,7 @@ public class CommentService {
 
 		commentRepository.save(comment);
 		
-		logger.info("success updateComment => " + comment);
+		log.info("success updateComment => " + comment);
 		
 	}
 	
@@ -110,7 +108,7 @@ public class CommentService {
 		
 		commentRepository.save(comment);
 
-		logger.info("success deleteComment => " + commentId);
+		log.info("success deleteComment => " + commentId);
 		
 	}
 	

@@ -2,8 +2,6 @@ package com.woowa.board.noti.controller;
 
 import javax.mail.MessagingException;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,6 +16,7 @@ import com.woowa.board.noti.vo.RequestMail;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * 
@@ -26,11 +25,10 @@ import io.swagger.annotations.ApiResponses;
  * 비밀번호 설정
  * https://velog.io/@max9106/Spring-Boot-Gmail-SMTP-%EC%82%AC%EC%9A%A9%ED%95%98%EA%B8%B0%EB%A9%94%EC%9D%BC%EB%B3%B4%EB%82%B4%EA%B8%B0
  */
+@Slf4j
 @RestController
 @RequestMapping("/mail/api")
 public class MailController {
-
-	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
 	@Autowired
 	private MailService mailService;
@@ -49,7 +47,7 @@ public class MailController {
 					.message(message)
 					.build();
 
-			logger.info("requestMail => " + requestMail);
+			log.info("requestMail => " + requestMail);
 			mailService.sendMail(requestMail);
 
     		response.setResponseCode(ResponseCode.SUCCESS);

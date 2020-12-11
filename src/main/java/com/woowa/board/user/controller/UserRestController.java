@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -28,12 +26,12 @@ import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 @RestController
 @RequestMapping(path = "/user/api")
 public class UserRestController {
-
-	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
 	@Autowired
 	private UserService userService;
@@ -66,7 +64,7 @@ public class UserRestController {
 	@GetMapping(path = "/get/{userId}")
 	public UserResponse getUser( @PathVariable String userId) throws Exception {
 
-		logger.info("userId =>" + userId);
+		log.info("userId =>" + userId);
 		
 		UserResponse response = new UserResponse();
 		
@@ -90,7 +88,7 @@ public class UserRestController {
 	@PostMapping(path = "/insert")
 	public ResponseDto insertPost(@RequestBody UserRequest insertUser) throws Exception {
 
-		logger.info("insertUser =>" + insertUser);
+		log.info("insertUser =>" + insertUser);
 		
 		ResponseDto response = new ResponseDto();
 
@@ -114,8 +112,8 @@ public class UserRestController {
 	@PutMapping(path = "/update/{userId}")
 	public ResponseDto updateComment(@PathVariable String userId, @RequestBody UserRequest updateUser) throws Exception {
 
-		logger.info("userId =>" + userId);
-		logger.info("updateUser =>" + updateUser.toString());
+		log.info("userId =>" + userId);
+		log.info("updateUser =>" + updateUser.toString());
 
 		ResponseDto response = new ResponseDto();
 		
@@ -139,7 +137,7 @@ public class UserRestController {
 	@DeleteMapping(path = "/delete/{userId}")
 	public ResponseDto deleteUser(@PathVariable String userId) throws Exception {
 
-		logger.info("userId =>" + userId);
+		log.info("userId =>" + userId);
 		
 		ResponseDto response = new ResponseDto();
 		

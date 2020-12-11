@@ -10,6 +10,9 @@ import org.springframework.stereotype.Service;
 
 import com.woowa.board.noti.vo.RequestMail;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @Service
 public class MailService {
 
@@ -27,6 +30,8 @@ public class MailService {
         message.setSubject(requestMail.getTitle());
         message.setText(requestMail.getMessage());
         emailSender.send(message);
+        
+        log.info("success sendMail");
 		
 	}
 }

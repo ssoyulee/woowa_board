@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -37,8 +35,6 @@ import lombok.extern.slf4j.Slf4j;
 @RequestMapping(path = "/post/api")
 public class PostRestController {
 
-	private final Logger logger = LoggerFactory.getLogger(this.getClass());
-	
 	@Autowired
 	private PostService postService;
 	
@@ -73,7 +69,7 @@ public class PostRestController {
 	@GetMapping(path = "/select/{boardId}")
 	public PostResponse selectPostByBoardId( @PathVariable Long boardId) throws Exception {
 
-		logger.info("boardId =>" + boardId);
+		log.info("boardId =>" + boardId);
 		
 		PostResponse response = new PostResponse();
 		
@@ -136,7 +132,7 @@ public class PostRestController {
 	@GetMapping(path = "/get/{postId}")
 	public PostResponse getPost( @PathVariable Long postId) throws Exception {
 
-		logger.info("boardId =>" + postId);
+		log.info("boardId =>" + postId);
 		
 		PostResponse response = new PostResponse();
 		
@@ -160,7 +156,7 @@ public class PostRestController {
 	@PostMapping(path = "/insert")
 	public ResponseDto insertPost(@RequestBody PostRequest insertPost) throws Exception {
 
-		logger.info("insertPost =>" + insertPost);
+		log.info("insertPost =>" + insertPost);
 		
 		ResponseDto response = new ResponseDto();
 
@@ -184,8 +180,8 @@ public class PostRestController {
 	@PutMapping(path = "/update/{postId}")
 	public ResponseDto updatePost(@PathVariable Long postId, @RequestBody PostRequest updatePost) throws Exception {
 
-		logger.info("postId =>" + postId);
-		logger.info("updatePost =>" + updatePost.toString());
+		log.info("postId =>" + postId);
+		log.info("updatePost =>" + updatePost.toString());
 
 		ResponseDto response = new ResponseDto();
 		
@@ -209,7 +205,7 @@ public class PostRestController {
 	@DeleteMapping(path = "/delete/{postId}")
 	public ResponseDto deletePost(@PathVariable Long postId) throws Exception {
 
-		logger.info("postId =>" + postId);
+		log.info("postId =>" + postId);
 		
 		ResponseDto response = new ResponseDto();
 		
