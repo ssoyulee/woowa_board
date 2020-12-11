@@ -14,7 +14,7 @@ import javax.persistence.SequenceGenerator;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
-import com.woowa.board.user.dao.User;
+import com.woowa.board.user.dao.UserAccount;
 
 import lombok.Builder;
 import lombok.Getter;
@@ -70,7 +70,7 @@ public class Post {
 
 	@ManyToOne
 	@JoinColumn(name="regpe_id", referencedColumnName="user_id", insertable=false, updatable=false)
-	private User user;
+	private UserAccount user;
 	
 	@Builder
 	public Post(Long boardId, String postTitle, String postContent, String explanation, String delYn, String regpeId, String modpeId) {

@@ -1,6 +1,7 @@
 package com.woowa.board.user.dao;
 
 import java.time.LocalDateTime;
+import java.util.Collection;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,6 +12,8 @@ import javax.validation.constraints.Email;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import com.woowa.board.user.code.UserRole;
 
@@ -25,7 +28,7 @@ import lombok.ToString;
 @ToString
 @NoArgsConstructor
 @Entity(name = "user")
-public class User {
+public class UserAccount implements UserDetails {
 	
 	@Id
 	@Column(name="user_id")
@@ -72,7 +75,7 @@ public class User {
 	private LocalDateTime modDts;
 	
 	@Builder
-	public User(String userId, String password, String name, String email, Long ranking, Long score, UserRole role, String delYn, String regpeId, String modpeId) {
+	public UserAccount(String userId, String password, String name, String email, Long ranking, Long score, UserRole role, String delYn, String regpeId, String modpeId) {
 		this.userId = userId;
 		this.password = password;
 		this.name = name;
@@ -83,6 +86,42 @@ public class User {
 		this.delYn = delYn;
 		this.regpeId = regpeId;;
 		this.modpeId = modpeId;
+	}
+
+	@Override
+	public Collection<? extends GrantedAuthority> getAuthorities() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String getUsername() {
+		// TODO Auto-generated method stub
+		return this.userId;
+	}
+
+	@Override
+	public boolean isAccountNonExpired() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean isAccountNonLocked() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean isCredentialsNonExpired() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean isEnabled() {
+		// TODO Auto-generated method stub
+		return false;
 	}
 	
 }

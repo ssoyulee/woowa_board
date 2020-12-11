@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout/default">
+
+    <!-- index.html 고유 CSS 추가 
+    <th:block layout:fragment="css">
+        <link rel="stylesheet" th:href="@{/css/page/home.css}" >
+    </th:block>
+    -->
+    <!-- index.html 고유 스크립트 추가 -->
+    <th:block layout:fragment="script">
+	    <script th:src="@{/static/js/index.js}"></script>
+    </th:block>
+    <div layout:fragment="content">
+		<div class="page-wrap d-flex flex-row align-items-center">
+		    <div class="container">
+		        <div class="row justify-content-center">
+		            <div class="col-md-12 text-center">
+		                <span class="display-1 d-block">403</span>
+		                <div class="mb-4 lead">해당 페이지에 접근 권한이 없습니다.</div>
+		                <a href="/index" class="btn btn-link">Back to Home</a>
+		            </div>
+		        </div>
+		    </div>
+		</div>
+	</div>
+</html>			

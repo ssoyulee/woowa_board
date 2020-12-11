@@ -8,7 +8,7 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.woowa.board.user.dao.User;
+import com.woowa.board.user.dao.UserAccount;
 import com.woowa.board.user.dao.UserRepository;
 import com.woowa.board.user.vo.UserRequest;
 
@@ -21,28 +21,28 @@ public class UserService {
 	@Autowired
 	private UserRepository userRepository;
 	
-	public List<User> select() throws Exception {
+	public List<UserAccount> select() throws Exception {
 		
 		return userRepository.findAll();
 		
 	}
 	
-	public Optional<User> getUserById(String userId) throws Exception {
+	public Optional<UserAccount> getUserById(String userId) throws Exception {
 		
-		Optional<User> user = userRepository.findById(userId);
+		Optional<UserAccount> user = userRepository.findById(userId);
 		return user;
 	}
 	
-	public Optional<User> getUserByUserIdAndPassword(String userId, String password) throws Exception {
+	public Optional<UserAccount> getUserByUserIdAndPassword(String userId, String password) throws Exception {
 		
-		Optional<User> user = userRepository.findByUserIdAndPassword(userId,password);
+		Optional<UserAccount> user = userRepository.findByUserIdAndPassword(userId,password);
 		return user;
 	}
 	
 	@Transactional
 	public void insert(UserRequest userRequest) throws Exception {
 		
-		User user= User.builder()
+		UserAccount user= UserAccount.builder()
 						.userId(userRequest.getUserId())		
 						.password(userRequest.getPassword())
 						.name(userRequest.getName())
@@ -62,7 +62,7 @@ public class UserService {
 	@Transactional
 	public void update(String userId, UserRequest userRequest) throws Exception {
 		
-		User user = userRepository.findById(userId).orElseThrow(() -> new IllegalArgumentException("해당 사용자가 없습니다. userId=" + userId));
+		UserAccount user = userRepository.findById(userId).orElseThrow(() -> new IllegalArgumentException("해당 사용자가 없습니다. userId=" + userId));
 		
 		user.setPassword(userRequest.getPassword());
 		user.setName(userRequest.getName());
@@ -79,7 +79,7 @@ public class UserService {
 	@Transactional
 	public void updateSession(String userId, String sessionId) throws Exception {
 		
-		User user = userRepository.findById(userId).orElseThrow(() -> new IllegalArgumentException("해당 사용자가 없습니다. userId=" + userId));
+		UserAccount user = userRepository.findById(userId).orElseThrow(() -> new IllegalArgumentException("해당 사용자가 없습니다. userId=" + userId));
 		
 		user.setSessionId(sessionId);
 		userRepository.save(user);
@@ -91,7 +91,7 @@ public class UserService {
 	@Transactional
 	public void delete(String userId) throws Exception {
 		
-		User user = userRepository.findById(userId).orElseThrow(() -> new IllegalArgumentException("해당 사용자가 없습니다. userId=" + userId));
+		UserAccount user = userRepository.findById(userId).orElseThrow(() -> new IllegalArgumentException("해당 사용자가 없습니다. userId=" + userId));
 		
 		user.setDelYn("Y");
 		

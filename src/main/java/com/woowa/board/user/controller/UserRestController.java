@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.woowa.board.common.code.ResponseCode;
 import com.woowa.board.common.dto.ResponseDto;
-import com.woowa.board.user.dao.User;
+import com.woowa.board.user.dao.UserAccount;
 import com.woowa.board.user.service.UserService;
 import com.woowa.board.user.vo.UserRequest;
 import com.woowa.board.user.vo.UserResponse;
@@ -43,7 +43,7 @@ public class UserRestController {
 		
 		UserResponse response = new UserResponse();
 		
-		List<User> listUser = userService.select();
+		List<UserAccount> listUser = userService.select();
 		
     	if ( listUser.isEmpty() ) {
     		response.setResponseCode(ResponseCode.IS_EMPTY);
@@ -68,11 +68,11 @@ public class UserRestController {
 		
 		UserResponse response = new UserResponse();
 		
-		Optional<User> user = userService.getUserById(userId);
+		Optional<UserAccount> user = userService.getUserById(userId);
 		
     	if ( user.isPresent() ) {
     		response.setResponseCode(ResponseCode.SUCCESS);
-    		List<User> listUser = new ArrayList<User>();
+    		List<UserAccount> listUser = new ArrayList<UserAccount>();
     		listUser.add(user.get());
     		response.setResultList(listUser);
     	} else {

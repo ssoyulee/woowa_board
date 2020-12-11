@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.woowa.board.user.dao.User;
+import com.woowa.board.user.dao.UserAccount;
 import com.woowa.board.user.service.UserService;
 import com.woowa.board.user.vo.UserRequest;
 
@@ -41,14 +41,14 @@ public class UserController {
 		
 		try {
 			
-			Optional<User> result = userService.getUserByUserIdAndPassword(user.getUserId(), user.getPassword());
+			Optional<UserAccount> result = userService.getUserByUserIdAndPassword(user.getUserId(), user.getPassword());
 			
 			if ( !result.isPresent() ) {
 				throw new Exception("회원 정보가 존재하지 않습니다.");
 			}
 			HttpSession session = request.getSession(true);
 			
-			User loginUser = result.get();
+			UserAccount loginUser = result.get();
 			Cookie cookieUserId = new Cookie("userId", loginUser.getUserId());
 			cookieUserId.setPath("/");
 			cookieUserId.setMaxAge(60*60*1);
@@ -114,5 +114,10 @@ public class UserController {
 	        mv.addObject("resultMsg","로그인 정보가 존재하지 않습니다.");			
 		}
 		return mv;
+	}
+	
+	@RequestMapping(path = "/error", method = RequestMethod.GET)
+	public String error(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        return "error";
 	}
 }

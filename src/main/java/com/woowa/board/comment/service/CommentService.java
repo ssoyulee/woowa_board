@@ -14,7 +14,7 @@ import com.woowa.board.noti.service.MailService;
 import com.woowa.board.noti.vo.RequestMail;
 import com.woowa.board.post.dao.Post;
 import com.woowa.board.post.service.PostService;
-import com.woowa.board.user.dao.User;
+import com.woowa.board.user.dao.UserAccount;
 import com.woowa.board.user.service.UserService;
 
 import lombok.extern.slf4j.Slf4j;
@@ -62,7 +62,7 @@ public class CommentService {
 		
 		// 이메일을 전송한다.
 		Post post = postService.selectPostById(insertComment.getPostId()).orElseThrow(() -> new IllegalArgumentException("해당 게시글이 없습니다. postId =" + insertComment.getPostId()));
-		User user = userService.getUserById(post.getRegpeId()).orElseThrow(() -> new IllegalArgumentException("해당 사용자가 없습니다. userId =" + post.getRegpeId()));
+		UserAccount user = userService.getUserById(post.getRegpeId()).orElseThrow(() -> new IllegalArgumentException("해당 사용자가 없습니다. userId =" + post.getRegpeId()));
 		
 		RequestMail requestMail = RequestMail.builder()
 									.address(user.getEmail())
