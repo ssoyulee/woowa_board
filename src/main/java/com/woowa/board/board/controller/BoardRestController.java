@@ -1,6 +1,6 @@
 package com.woowa.board.board.controller;
 
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -45,7 +45,7 @@ public class BoardRestController {
 	@GetMapping("/list")
 	public BoardResponse select(@RequestParam(required = false) String delYn) throws Exception {
 
-    	log.info("delYn =>" + delYn);
+    	log.info("select ::: delYn = > {}", delYn);
     	
     	BoardResponse response = new BoardResponse();
 		
@@ -69,15 +69,15 @@ public class BoardRestController {
 	@GetMapping(path = "/get/{boardId}")
 	public BoardResponse selectBoardId( @PathVariable Long boardId) throws Exception {
 
-		log.info("boardId =>" + boardId);
+		log.info("get ::: boardId = > {}", boardId);
 		
 		BoardResponse response = new BoardResponse();
 		
 		Optional<Board> board = boardService.getBoardById(boardId);
+		
     	if ( board.isPresent() ) {
+    		List<Board> resultList = Arrays.asList(board.get());
     		response.setResponseCode(ResponseCode.SUCCESS);
-        	List<Board> resultList = new ArrayList<Board>();
-        	resultList.add(board.get());
         	response.setResultList(resultList);
     	} else {
     		response.setResponseCode(ResponseCode.IS_EMPTY);
@@ -92,7 +92,7 @@ public class BoardRestController {
 	@PostMapping(path = "/insert")
 	public ResponseDto insertBoard(@RequestBody BoardRequest insertBoard) throws Exception {
 
-		log.info("insertBoard =>" + insertBoard);
+		log.info("insertBoard ::: start");
 		
 		ResponseDto response = new ResponseDto();
 
@@ -116,8 +116,7 @@ public class BoardRestController {
 	@PutMapping(path = "/update/{boardId}")
 	public ResponseDto updateBoard(@PathVariable Long boardId, @RequestBody BoardRequest updateBoard) throws Exception {
 
-		log.info("boardId =>" + boardId);
-		log.info("updateBoard =>" + updateBoard.toString());
+		log.info("updateBoard ::: boardId = > {}", boardId);
 
 		ResponseDto response = new ResponseDto();
 		
@@ -141,7 +140,7 @@ public class BoardRestController {
 	@DeleteMapping(path = "/delete/{boardId}")
 	public ResponseDto deleteBoard(@PathVariable Long boardId) throws Exception {
 
-		log.info("boardId =>" + boardId);
+		log.info("deleteBoard ::: boardId = > {}", boardId);
 		
 		ResponseDto response = new ResponseDto();
 		

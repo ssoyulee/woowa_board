@@ -20,6 +20,7 @@ $(function() {
 				    type: "GET",
 				    dataType: "json",
 				    success: function(data){
+						console.debug("resultCode => ", result);
 						if ( data.resultCode == '00' ){
 					    	boardApp.board = data.resultList[0];
 						}else{
@@ -27,9 +28,8 @@ $(function() {
 						}		
 				    },
 				    error: function (request, status, error){        
-						var msg = "ERROR : " + request.status + "<br>"
-						msg +=  + "내용 : " + request.responseText + "<br>" + error;
-						alert(msg);              
+						console.error("status => " + request.status + "error => " + request.responseText);
+						alert("오류가 발생하였습니다. 관리자에게 문의해주세요~");        
 				    }
 				});				
 			},
@@ -58,6 +58,7 @@ $(function() {
 					data : param,
 				    dataType: "json",
 				    success: function(data){
+						console.debug("resultCode => ", result);
 						if ( data.resultCode == '00' ){
 							$.each(data.resultList, (index, data)=>{
 								data.url = "/post/detail?boardId="+data.boardId+"&postId=" + data.postId
@@ -71,9 +72,8 @@ $(function() {
 						}	
 				    },
 				    error: function (request, status, error){        
-						var msg = "ERROR : " + request.status + "<br>"
-						msg +=  + "내용 : " + request.responseText + "<br>" + error;
-						alert(msg);              
+						console.error("status => " + request.status + "error => " + request.responseText);
+						alert("오류가 발생하였습니다. 관리자에게 문의해주세요~");        
 				    }
 				});
 			},

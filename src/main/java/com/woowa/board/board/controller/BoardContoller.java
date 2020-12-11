@@ -17,8 +17,10 @@ public class BoardContoller {
 	@RequestMapping(path = "/index")
 	public String index(@RequestParam Long boardId, Model model) throws Exception {
 
-		log.info("inndex => {}", boardId);
+		log.info("index ::: boardId = > {}", boardId);
+		
 		model.addAttribute("boardId", boardId);
+		
 		return "board/boardIndex";
 	}
 	

@@ -23,7 +23,7 @@ public class BoardService {
 	
 	public List<Board> select(String delYn) throws Exception {
 		
-		log.info("select delYn => " + delYn);
+		log.info("select ::: delYn = > {}", delYn);
 		
 		if ( delYn != null && !delYn.isEmpty() ) {
 			return boardRepository.findAllByDelYn(delYn);	
@@ -34,7 +34,7 @@ public class BoardService {
 	
 	public Optional<Board> getBoardById(Long boardId) throws Exception {
 		
-		log.info("getBoardById boardId => " + boardId);
+		log.info("getBoardById ::: boardId = > {}", boardId);
 		
 		Optional<Board> board = boardRepository.findById(boardId);
 
@@ -54,7 +54,7 @@ public class BoardService {
 
 		boardRepository.save(board);
 
-		log.info("success insertBoard => " + insertBoard);
+		log.info("insert ::: board insert success ::: insertBoard = > {}", insertBoard);
 		
 	}
 	
@@ -69,7 +69,7 @@ public class BoardService {
 
 		boardRepository.save(board);
 		
-		log.info("success updateBoard => " + board);
+		log.info("update ::: board update success ::: board = > {}", board);
 		
 	}
 	
@@ -82,7 +82,7 @@ public class BoardService {
 		
 		boardRepository.save(board);
 		
-		log.info("success deleteBoard => " + boardId);
+		log.info("update ::: board delete success ::: boardId = > {}", boardId);
 
 	}
 	
