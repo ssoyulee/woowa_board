@@ -25,8 +25,8 @@ $(function() {
 			type: "GET",
 			url: tabUrl,
 			dataType: "html",
-			success: function(data){
-				$('#tabContent').html(data);
+			success: function(resultHtml){
+				$('#tabContent').html(resultHtml);
 			}
 		});	
 	}

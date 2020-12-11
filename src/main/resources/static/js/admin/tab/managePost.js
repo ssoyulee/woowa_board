@@ -12,18 +12,17 @@ $(function() {
 				    url: "/post/api/list",
 				    type: "GET",
 				    dataType: "json",
-				    success: function(data){
-						if ( data.resultCode == '00' ){
-					    	managePostApp.postList = data.resultList;
+				    success: function(result){
+						if ( result.resultCode == '00' ){
+					    	managePostApp.postList = result.resultList;
 						}else{
-							alert(data.resultMessage);
+							alert(result.resultMessage);
 						}
 				    },
 				    
 				    error: function (request, status, error){        
-						var msg = "ERROR : " + request.status + "<br>"
-						msg +=  + "내용 : " + request.responseText + "<br>" + error;
-						alert(msg);              
+						console.error("status => " + request.status + "error => " + request.responseText);
+						alert("오류가 발생하였습니다. 관리자에게 문의해주세요~");                  
 				    }
 				});
 			},
@@ -33,19 +32,18 @@ $(function() {
 				    url: "/post/api/delete/" + postId,
 				    type: "DELETE",
 				    dataType: "json",
-				    success: function(data){
-						if ( data.resultCode == '00' ){
+				    success: function(result){
+						if ( result.resultCode == '00' ){
 					    	alert('게시물 삭제를 완료 하였습니다.');
 							managePostApp.selectPost();
 						}else{
-							alert(data.resultMessage);
+							alert(result.resultMessage);
 						}
 				    },
 				    
 				    error: function (request, status, error){        
-						var msg = "ERROR : " + request.status + "<br>"
-						msg +=  + "내용 : " + request.responseText + "<br>" + error;
-						alert(msg);              
+						console.error("status => " + request.status + "error => " + request.responseText);
+						alert("오류가 발생하였습니다. 관리자에게 문의해주세요~");              
 				    }
 				});					
 			}				
@@ -60,11 +58,3 @@ $(function() {
 	
 	managePostApp.selectPost();
 });
-
-/*	
-$(function() {
-	$('#test').on('click', ()=>{
-		alert('manageUserApp');
-	})
-});	
-*/

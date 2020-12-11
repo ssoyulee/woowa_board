@@ -19,12 +19,12 @@ $(function() {
 				    url: "/board/api/get/" + reqBoardId,
 				    type: "GET",
 				    dataType: "json",
-				    success: function(data){
+				    success: function(result){
 						console.debug("resultCode => ", result);
-						if ( data.resultCode == '00' ){
-					    	boardApp.board = data.resultList[0];
+						if ( result.resultCode == '00' ){
+					    	boardApp.board = result.resultList[0];
 						}else{
-							alert(data.resultMessage);
+							alert(result.resultMessage);
 						}		
 				    },
 				    error: function (request, status, error){        
@@ -57,18 +57,18 @@ $(function() {
 				    type: "GET",
 					data : param,
 				    dataType: "json",
-				    success: function(data){
+				    success: function(result){
 						console.debug("resultCode => ", result);
-						if ( data.resultCode == '00' ){
-							$.each(data.resultList, (index, data)=>{
-								data.url = "/post/detail?boardId="+data.boardId+"&postId=" + data.postId
+						if ( result.resultCode == '00' ){
+							$.each(result.resultList, (index, post)=>{
+								post.url = "/post/detail?boardId="+post.boardId+"&postId=" + post.postId
 							})
-					    	boardApp.postList = data.resultList;
-							boardApp.totalPage = data.totalPage;
-							boardApp.totalCount = data.totalCount;
+					    	boardApp.postList = result.resultList;
+							boardApp.totalPage = result.totalPage;
+							boardApp.totalCount = result.totalCount;
 							
 						}else{
-							alert(data.resultMessage);
+							alert(result.resultMessage);
 						}	
 				    },
 				    error: function (request, status, error){        

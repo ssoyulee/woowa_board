@@ -29,9 +29,8 @@ $(function() {
 				    },
 				    
 				    error: function (request, status, error){        
-						var msg = "ERROR : " + request.status + "<br>"
-						msg +=  + "내용 : " + request.responseText + "<br>" + error;
-						alert(msg);              
+						console.error("status => " + request.status + "error => " + request.responseText);
+						alert("오류가 발생하였습니다. 관리자에게 문의해주세요~");       
 				    }
 				});
 			},
@@ -46,12 +45,12 @@ $(function() {
 			        cache : false,
 			        url : "/user/logout", // 요기에
 			        type : "GET", 
-			        success : function(data) {
-			            if ( data.resultCode == '00' ) {
+			        success : function(result) {
+			            if ( result.resultCode == '00' ) {
 							alert('로그아웃 성공');
 							setLogin();
 						}else{
-							alert(data.resultMsg);
+							alert(result.resultMsg);
 						}
 			        }, // success
 			        error : function(xhr, status) {

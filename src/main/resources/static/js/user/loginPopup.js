@@ -21,12 +21,12 @@ const login = () =>{
 			} else {
 				alert(result.resultMsg);
 			}			
-        }, // success 
-
-        error : function(xhr, status) {
-            alert(xhr + " : " + status);
-        }
-    }); // $.ajax */
+        }, 
+	    error: function (request, status, error){        
+			console.error("status => " + request.status + "error => " + request.responseText);
+			alert("오류가 발생하였습니다. 관리자에게 문의해주세요~");        
+	    }
+    });
 }
 
 const login_back = () =>{
@@ -43,18 +43,18 @@ const login_back = () =>{
 		dataType : "json",
 		contentType: "application/json",
         data : JSON.stringify(user), 
-        success : function(data) {
-            if ( data.resultCode == '00' ) {
+        success : function(result) {
+            if ( result.resultCode == '00' ) {
 				alert('로그인 성공');
 				$(opener.location).attr("href", "javascript:setLogin();");
 				window.close();
 			} else {
-				alert(data.resultMsg);
+				alert(result.resultMsg);
 			}
-        }, // success 
-
-        error : function(xhr, status) {
-            alert(xhr + " : " + status);
-        }
-    }); // $.ajax */
+        }, 
+	    error: function (request, status, error){        
+			console.error("status => " + request.status + "error => " + request.responseText);
+			alert("오류가 발생하였습니다. 관리자에게 문의해주세요~");        
+	    }
+    });
 }

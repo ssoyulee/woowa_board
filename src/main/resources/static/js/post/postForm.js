@@ -27,19 +27,19 @@ $(function() {
 					dataType : "json",
 					contentType: "application/json",
 			        data : JSON.stringify(postApp.post), 
-			        success : function(data) {
-			            if ( data.resultCode == '00' ) {
+			        success : function(result) {
+			            if ( result.resultCode == '00' ) {
 							alert('글쓰기 성공');
 							location.href = "/board/index?boardId=" + postApp.post.boardId;
 						}else{
-							alert(data.resultMessage);
+							alert(result.resultMessage);
 						}
-			        }, // success 
-			
-			        error : function(xhr, status) {
-			            alert(xhr + " : " + status);
-			        }
-			    }); // $.ajax */
+			        },
+				    error: function (request, status, error){        
+						console.error("status => " + request.status + "error => " + request.responseText);
+						alert("오류가 발생하였습니다. 관리자에게 문의해주세요~");        
+				    }
+			    });
 			},
 			
 			updatePost : () => {
@@ -53,19 +53,19 @@ $(function() {
 					dataType : "json",
 					contentType: "application/json",
 			        data : JSON.stringify(postApp.post), 
-			        success : function(data) {
-			            if ( data.resultCode == '00' ) {
+			        success : function(result) {
+			            if ( result.resultCode == '00' ) {
 							alert('게시물 수정 성공');
 							location.href = "/board/index?boardId=" + postApp.post.boardId;
 						}else{
-							alert(data.resultMessage);
+							alert(result.resultMessage);
 						}
-			        }, // success 
-			
-			        error : function(xhr, status) {
-			            alert(xhr + " : " + status);
-			        }
-			    }); // $.ajax */
+			        }, 
+				    error: function (request, status, error){        
+						console.error("status => " + request.status + "error => " + request.responseText);
+						alert("오류가 발생하였습니다. 관리자에게 문의해주세요~");        
+				    }
+			    });
 			}			
 		}
 	});
@@ -84,23 +84,23 @@ $(function() {
 	        url : "/post/api/get/" + reqPostId, // 요기에
 	        type : "GET", 
 			contentType: "application/json", 
-	        success : function(data) {
-	            if ( data.resultCode == '00' ) {
-					let _post = data.resultList[0]
+	        success : function(result) {
+	            if ( result.resultCode == '00' ) {
+					let _post = result.resultList[0]
 					postApp.post.postId = _post.postId;
 					postApp.post.boardId = _post.boardId;
 					postApp.post.postTitle = _post.postTitle;
 					postApp.post.postContent = _post.postContent;  
 					$("#summernote").summernote("code", postApp.post.postContent);
 				}else{
-					alert(data.resultMessage);
+					alert(result.resultMessage);
 				}
-	        }, // success 
-	
-	        error : function(xhr, status) {
-	            alert(xhr + " : " + status);
-	        }
-	    }); // $.ajax */
+	        }, 
+		    error: function (request, status, error){        
+				console.error("status => " + request.status + "error => " + request.responseText);
+				alert("오류가 발생하였습니다. 관리자에게 문의해주세요~");        
+		    }
+	    });
 	} else {
 		postApp.post.boardId = reqBoardId;
 		postApp.post.userId = headerApp.loginId
@@ -110,7 +110,6 @@ $(function() {
 		postApp.loginId = headerApp.loginId;
 		postApp.role = headerApp.role;
 		if (!postApp.loginId){
-//			alert('로그인 정보가 존재하지 않아 게시판으로 이동합니다.');
 			location.href = "/board/index?boardId=" + postApp.post.boardId;	
 		}
 	});

@@ -17,17 +17,16 @@ $(function() {
 				    url: "/post/api/get/" + reqPostId,
 				    type: "GET",
 				    dataType: "json",
-				    success: function(data){
-						if ( data.resultCode == '00' ){
-					    	postDetailApp.post = data.resultList[0];
+				    success: function(result){
+						if ( result.resultCode == '00' ){
+					    	postDetailApp.post = result.resultList[0];
 						}else{
-							alert(data.resultMessage);
+							alert(result.resultMessage);
 						}		
 				    },
 				    error: function (request, status, error){        
-						var msg = "ERROR : " + request.status + "<br>"
-						msg +=  + "내용 : " + request.responseText + "<br>" + error;
-						alert(msg);              
+						console.error("status => " + request.status + "error => " + request.responseText);
+						alert("오류가 발생하였습니다. 관리자에게 문의해주세요~");             
 				    }
 				});						
 			},
@@ -37,17 +36,16 @@ $(function() {
 				    url: "/comment/api/get/" + reqPostId,
 				    type: "GET",
 				    dataType: "json",
-				    success: function(data){
-						if ( data.resultCode == '00' ){
-					    	postDetailApp.commentList = data.resultList;
+				    success: function(result){
+						if ( result.resultCode == '00' ){
+					    	postDetailApp.commentList = result.resultList;
 						}else{
-							console.info(data.resultMessage);
+							console.info(result.resultMessage);
 						}		
 				    },
 				    error: function (request, status, error){        
-						var msg = "ERROR : " + request.status + "<br>"
-						msg +=  + "내용 : " + request.responseText + "<br>" + error;
-						alert(msg);              
+						console.error("status => " + request.status + "error => " + request.responseText);
+						alert("오류가 발생하였습니다. 관리자에게 문의해주세요~");            
 				    }
 				});						
 			},
@@ -61,16 +59,15 @@ $(function() {
 				    url: "/post/api/delete/" + reqPostId,
 				    type: "DELETE",
 				    dataType: "json",
-				    success: function(data){
-						if ( data.resultCode == '00' ){
+				    success: function(result){
+						if ( result.resultCode == '00' ){
 							alert('글삭제 성공');
 							location.href = "/board/index?boardId=" + postDetailApp.post.boardId;
 						}	
 				    },
 				    error: function (request, status, error){        
-						var msg = "ERROR : " + request.status + "<br>"
-						msg +=  + "내용 : " + request.responseText + "<br>" + error;
-						alert(msg);              
+						console.error("status => " + request.status + "error => " + request.responseText);
+						alert("오류가 발생하였습니다. 관리자에게 문의해주세요~");           
 				    }
 				});	
 			},
@@ -92,17 +89,17 @@ $(function() {
 					dataType : "json",
 					contentType: "application/json",
 			        data : JSON.stringify(commentBody), 
-			        success : function(data) {
-			            if ( data.resultCode == '00' ) {
+			        success : function(result) {
+			            if ( result.resultCode == '00' ) {
 							alert('댓글 작성 완료');
 							postDetailApp.selectComments();
 						}
-			        }, // success 
-			
-			        error : function(xhr, status) {
-			            alert(xhr + " : " + status);
+			        },
+			        error: function (request, status, error){
+						console.error("status => " + request.status + "error => " + request.responseText);
+						alert("오류가 발생하였습니다. 관리자에게 문의해주세요~"); 
 			        }
-			    }); // $.ajax */
+			    });
 				
 			},
 
@@ -121,17 +118,17 @@ $(function() {
 					dataType : "json",
 					contentType: "application/json",
 			        data : JSON.stringify(commentBody), 
-			        success : function(data) {
-			            if ( data.resultCode == '00' ) {
+			        success : function(result) {
+			            if ( result.resultCode == '00' ) {
 							alert('댓글 수정 완료');
 							postDetailApp.selectComments();
 						}
-			        }, // success 
-			
-			        error : function(xhr, status) {
-			            alert(xhr + " : " + status);
-			        }
-			    }); // $.ajax */
+			        }, 
+				    error: function (request, status, error){        
+						console.error("status => " + request.status + "error => " + request.responseText);
+						alert("오류가 발생하였습니다. 관리자에게 문의해주세요~");        
+				    }
+			    });
 				
 			},
 
@@ -140,16 +137,15 @@ $(function() {
 				    url: "/comment/api/delete/" + commentId,
 				    type: "DELETE",
 				    dataType: "json",
-				    success: function(data){
-						if ( data.resultCode == '00' ){
+				    success: function(result){
+						if ( result.resultCode == '00' ){
 							alert('글삭제 성공');
 							postDetailApp.selectComments();
 						}	
 				    },
 				    error: function (request, status, error){        
-						var msg = "ERROR : " + request.status + "<br>"
-						msg +=  + "내용 : " + request.responseText + "<br>" + error;
-						alert(msg);              
+						console.error("status => " + request.status + "error => " + request.responseText);
+						alert("오류가 발생하였습니다. 관리자에게 문의해주세요~");           
 				    }
 				});	
 			},				

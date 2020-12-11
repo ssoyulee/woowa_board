@@ -20,18 +20,17 @@ $(function() {
 				    url: "/board/api/list",
 				    type: "GET",
 				    dataType: "json",
-				    success: function(data){
-						if ( data.resultCode == '00' ){
-					    	manageBoardApp.boardList = data.resultList;
+				    success: function(result){
+						if ( result.resultCode == '00' ){
+					    	manageBoardApp.boardList = result.resultList;
 						}else{
-							alert(data.resultMessage);
+							alert(result.resultMessage);
 						}
 				    },
 				    
 				    error: function (request, status, error){        
-						var msg = "ERROR : " + request.status + "<br>"
-						msg +=  + "내용 : " + request.responseText + "<br>" + error;
-						alert(msg);              
+						console.error("status => " + request.status + "error => " + request.responseText);
+						alert("오류가 발생하였습니다. 관리자에게 문의해주세요~");                  
 				    }
 				});
 			},
@@ -40,19 +39,18 @@ $(function() {
 				    url: "/board/api/get/" + boardId,
 				    type: "GET",
 				    dataType: "json",
-				    success: function(data){
-						if ( data.resultCode == '00' ){
-					    	manageBoardApp.boardForm = data.resultList[0];
+				    success: function(result){
+						if ( result.resultCode == '00' ){
+					    	manageBoardApp.boardForm = result.resultList[0];
 							manageBoardApp.isBoard = true;
 						}else{
-							alert(data.resultMessage);
+							alert(result.resultMessage);
 						}
 				    },
 				    
 				    error: function (request, status, error){        
-						var msg = "ERROR : " + request.status + "<br>"
-						msg +=  + "내용 : " + request.responseText + "<br>" + error;
-						alert(msg);              
+						console.error("status => " + request.status + "error => " + request.responseText);
+						alert("오류가 발생하였습니다. 관리자에게 문의해주세요~");                  
 				    }
 				});				
 			},		
@@ -66,21 +64,20 @@ $(function() {
 				    dataType: "json",
 					contentType: "application/json",
 					data : JSON.stringify(manageBoardApp.boardForm), 
-				    success: function(data){
-						if ( data.resultCode == '00' ){
+				    success: function(result){
+						if ( result.resultCode == '00' ){
 					    	alert('게시판 등록을 완료 하였습니다.');
 							manageBoardApp.selectBoard();
 							manageBoardApp.initBoard();
 							headerApp.selectBoardList();
 						}else{
-							alert(data.resultMessage);
+							alert(result.resultMessage);
 						}
 				    },
 				    
 				    error: function (request, status, error){        
-						var msg = "ERROR : " + request.status + "<br>"
-						msg +=  + "내용 : " + request.responseText + "<br>" + error;
-						alert(msg);              
+						console.error("status => " + request.status + "error => " + request.responseText);
+						alert("오류가 발생하였습니다. 관리자에게 문의해주세요~");                 
 				    }
 				});						
 			},
@@ -94,22 +91,21 @@ $(function() {
 				    dataType: "json",
 					contentType: "application/json",
 					data : JSON.stringify(manageBoardApp.boardForm),
-				    success: function(data){
-						if ( data.resultCode == '00' ){
+				    success: function(result){
+						if ( result.resultCode == '00' ){
 					    	alert('게시판 수정을 완료 하였습니다.');
 							manageBoardApp.selectBoard();
 							manageBoardApp.initBoard();
 							headerApp.selectBoardList();
 							
 						}else{
-							alert(data.resultMessage);
+							alert(result.resultMessage);
 						}
 				    },
 				    
 				    error: function (request, status, error){        
-						var msg = "ERROR : " + request.status + "<br>"
-						msg +=  + "내용 : " + request.responseText + "<br>" + error;
-						alert(msg);              
+						console.error("status => " + request.status + "error => " + request.responseText);
+						alert("오류가 발생하였습니다. 관리자에게 문의해주세요~");                   
 				    }
 				});					
 			},
@@ -127,20 +123,19 @@ $(function() {
 				    url: "/board/api/delete/" + boardId,
 				    type: "DELETE",
 				    dataType: "json",
-				    success: function(data){
-						if ( data.resultCode == '00' ){
+				    success: function(result){
+						if ( result.resultCode == '00' ){
 					    	alert('게시판 삭제를 완료 하였습니다.');
 							manageBoardApp.selectBoard();
 							headerApp.selectBoardList();
 						}else{
-							alert(data.resultMessage);
+							alert(result.resultMessage);
 						}
 				    },
 				    
 				    error: function (request, status, error){        
-						var msg = "ERROR : " + request.status + "<br>"
-						msg +=  + "내용 : " + request.responseText + "<br>" + error;
-						alert(msg);              
+						console.error("status => " + request.status + "error => " + request.responseText);
+						alert("오류가 발생하였습니다. 관리자에게 문의해주세요~");               
 				    }
 				});					
 			}
