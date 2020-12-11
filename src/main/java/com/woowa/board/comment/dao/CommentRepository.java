@@ -8,7 +8,9 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface CommentRepository extends JpaRepository<Comment, Long>{
 
-	List<Comment> findAllByDelYn(String delYn); 
+	List<Comment> findAllByOrderByCommentIdDesc();
+	
+	List<Comment> findAllByDelYnOrderByCommentIdDesc(String delYn); 
 
 	List<Comment> findAllByPostIdAndDelYnOrderByCommentIdDesc(Long postId, String delYn);
 }

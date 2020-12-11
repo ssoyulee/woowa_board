@@ -38,10 +38,10 @@ public class CommentService {
 	public List<Comment> select(String delYn) throws Exception {
 		
 		if ( delYn != null && !delYn.isEmpty() ) {
-			return commentRepository.findAllByDelYn(delYn);	
+			return commentRepository.findAllByDelYnOrderByCommentIdDesc(delYn);	
 		}
 		
-		return commentRepository.findAll();
+		return commentRepository.findAllByOrderByCommentIdDesc();
 	}
 	
 	public List<Comment> getCommentByPostId(Long postId, String delYn) throws Exception {

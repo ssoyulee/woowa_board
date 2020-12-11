@@ -43,6 +43,8 @@ public class CommentRestController {
 	@GetMapping("/list")
 	public CommentResponse select(@RequestParam(required = false) String delYn) throws Exception {
 		
+		log.info("select ::: delYn = > {}", delYn);
+		
 		CommentResponse response = new CommentResponse();
 		
 		List<Comment> listComment = commentService.select(delYn);
@@ -56,8 +58,6 @@ public class CommentRestController {
 		
 		return response;
 	}
-	
-	
 
 	@ApiOperation(value = "댓글 정보 조회", notes = "게시물 번호로 댓글을 조회하는 기능")
 	@ApiImplicitParams({
@@ -68,7 +68,7 @@ public class CommentRestController {
 	@GetMapping(path = "/get/{postId}")
 	public CommentResponse selectPostId( @PathVariable Long postId, @RequestParam(required = false) String delYn) throws Exception {
 
-		log.info("postId =>" + postId + " delYn =>" + delYn);
+		log.info("selectPostId ::: postId = > {}", postId);
 		
 		CommentResponse response = new CommentResponse();
 		
@@ -90,7 +90,7 @@ public class CommentRestController {
 	@PostMapping(path = "/insert")
 	public ResponseDto insertPost(@RequestBody CommentRequest insertComment) throws Exception {
 
-		log.info("insertComment =>" + insertComment);
+		log.info("insertPost ::: start");
 		
 		ResponseDto response = new ResponseDto();
 
@@ -114,8 +114,7 @@ public class CommentRestController {
 	@PutMapping(path = "/update/{commentId}")
 	public ResponseDto updateComment(@PathVariable Long commentId, @RequestBody CommentRequest updateComment) throws Exception {
 
-		log.info("commentId =>" + commentId);
-		log.info("updateComment =>" + updateComment.toString());
+		log.info("updateComment ::: commentId = > {}", commentId);
 
 		ResponseDto response = new ResponseDto();
 		
@@ -139,7 +138,7 @@ public class CommentRestController {
 	@DeleteMapping(path = "/delete/{commentId}")
 	public ResponseDto deleteComment(@PathVariable Long commentId) throws Exception {
 
-		log.info("commentId =>" + commentId);
+		log.info("deleteComment ::: boardId = > {}", commentId);
 		
 		ResponseDto response = new ResponseDto();
 		
