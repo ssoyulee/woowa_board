@@ -70,6 +70,7 @@ $(function() {
 						if ( data.resultCode == '00' ){
 					    	alert('게시판 등록을 완료 하였습니다.');
 							manageBoardApp.selectBoard();
+							manageBoardApp.initBoard();
 							headerApp.selectBoardList();
 						}else{
 							alert(data.resultMessage);
@@ -97,7 +98,9 @@ $(function() {
 						if ( data.resultCode == '00' ){
 					    	alert('게시판 수정을 완료 하였습니다.');
 							manageBoardApp.selectBoard();
+							manageBoardApp.initBoard();
 							headerApp.selectBoardList();
+							
 						}else{
 							alert(data.resultMessage);
 						}

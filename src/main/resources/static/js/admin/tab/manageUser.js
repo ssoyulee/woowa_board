@@ -73,6 +73,7 @@ $(function() {
 				    success: function(data){
 						if ( data.resultCode == '00' ){
 					    	alert('사용자 등록을 완료 하였습니다.');
+							manageUserApp.initUser();
 							manageUserApp.selectUser();
 						}else{
 							alert(data.resultMessage);
@@ -97,6 +98,7 @@ $(function() {
 				    success: function(data){
 						if ( data.resultCode == '00' ){
 					    	alert('사용자 수정을 완료 하였습니다.');
+							manageUserApp.initUser();
 							manageUserApp.selectUser();
 						}else{
 							alert(data.resultMessage);
