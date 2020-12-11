@@ -31,7 +31,7 @@
 		        			<th style="width:10%">권한</th>
 		        			<th style="width:10%">랭킹</th>
 		        			<th style="width:10%">Score</th>
-		        			<th style="width:10%">삭제여부</th>
+		        			<th style="width:10%">숨김여부</th>
 		        			<th style="width:10%"></th>
 		        		</tr>
 		        	</thead>
@@ -44,7 +44,7 @@
 				    	<td>{{ user.score }}</td>
 				    	<td>{{ user.delYn }}</td>
 				    	<td>
-				    		<button class="btn btn-sm btn-outline-secondary" type ="button" v-on:click="deleteUser(user.userId) ">삭제</button>
+				    		<button class="btn btn-sm btn-outline-secondary" type ="button" v-on:click="deleteUser(user.userId) ">숨김</button>
 				    	</td>				    	
 				    </tr>        	
 		        </table>   			
@@ -94,7 +94,15 @@
 				<div class="form-group row">
 					<label for="inputRole" class="col-sm-2 col-form-label">권한</label>
 					<div class="col-sm-10">
+						<!-- 
 						<input type="text" class="form-control" placeholder="권한을 입력하세요." v-model="userForm.role">
+						 -->
+						<select class="form-control" v-model="userForm.role">
+							<option v-for="option in roleOptions" v-bind:value="option.value">
+								{{ option.text }}
+							</option>
+						</select>						 
+						 
 					</div>
 				</div>
 			</div>					

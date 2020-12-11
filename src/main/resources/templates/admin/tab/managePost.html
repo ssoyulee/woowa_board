@@ -17,20 +17,20 @@
 		        <table class="table table-sm">
 		        	<thead class="thead-light">
 		        		<tr>
-		        			<th style="width:10%">게시판 ID</th>
-		        			<th style="width:30%">게시물 ID</th>
+		        			<th style="width:20%">게시물 ID</th>
+		        			<th style="width:20%">게시판 ID</th>
 		        			<th style="width:40%">게시물 제목</th>
-		        			<th style="width:10%">삭제여부</th>
+		        			<th style="width:10%">숨김여부</th>
 		        			<th style="width:10%"></th>
 		        		</tr>
 		        	</thead>
 				    <tr v-for="post in postList">
-				    	<td>{{ post.boardId }}</td>
 				    	<td>{{ post.postId }}</td>
+				    	<td>{{ post.boardId }}</td>
 				    	<td>{{ post.postTitle }}</td>
 				    	<td>{{ post.delYn }}</td>
 				    	<td>
-				    		<button class="btn btn-sm btn-outline-secondary" type ="button" v-on:click="deletePost(post.postId) ">삭제</button>
+				    		<button class="btn btn-sm btn-outline-secondary" type ="button" v-on:click="deletePost(post.postId) ">숨김</button>
 				    	</td>	
 				    </tr>        	
 		        </table>   			

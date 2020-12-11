@@ -17,10 +17,10 @@
 		        <table class="table table-sm">
 		        	<thead class="thead-light">
 		        		<tr>
-		        			<th style="width:10%">ID</th>
-		        			<th style="width:30%">게시물번호</th>
+		        			<th style="width:10%">댓글 ID</th>
+		        			<th style="width:30%">게시물 ID</th>
 		        			<th style="width:40%">코멘트</th>
-		        			<th style="width:10%">삭제여부</th>
+		        			<th style="width:10%">숨김여부</th>
 		        			<th style="width:10%"></th>
 		        		</tr>
 		        	</thead>
@@ -30,7 +30,7 @@
 				    	<td>{{ comment.commentContent }}</td>
 				    	<td>{{ comment.delYn }}</td>
 				    	<td>
-				    		<button class="btn btn-sm btn-outline-secondary" type ="button" v-on:click="deleteComment(comment.commentId) ">삭제</button>
+				    		<button class="btn btn-sm btn-outline-secondary" type ="button" v-on:click="deleteComment(comment.commentId) ">숨김</button>
 				    	</td>				    	
 				    </tr>        	
 		        </table>   			

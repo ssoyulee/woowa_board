@@ -11,8 +11,13 @@ $(function() {
 				userId : null,
 				password : null,
 				name : null,
-				email : null
-			}
+				email : null,
+				role : null
+			},
+			roleOptions : [
+				{text : 'ADMIN', value : 'ADMIN'},
+				{text : 'MEMBER', value : 'MEMBER'},
+			]
 		},
 		methods : {
 			selectUser : () => {
@@ -144,6 +149,10 @@ $(function() {
 	$('#headerApp').on('DOMSubtreeModified', '#heardLogin', function(){
 		manageUserApp.loginId = headerApp.loginId;
 		manageUserApp.role = headerApp.role;
+		if (!manageUserApp.loginId){
+//			alert('로그인 정보가 존재하지 않아 게시판으로 이동합니다.');
+			location.href = "/index";
+		}
 	});
 	
 	manageUserApp.selectUser();		

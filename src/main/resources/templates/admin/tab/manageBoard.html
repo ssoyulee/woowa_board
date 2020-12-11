@@ -18,10 +18,10 @@
 		        <table class="table table-sm">
 		        	<thead class="thead-light">
 		        		<tr>
-		        			<th style="width:10%">게시판ID</th>
+		        			<th style="width:10%">게시판 ID</th>
 		        			<th style="width:30%">게시판명</th>
 		        			<th style="width:40%">게시판설명</th>
-		        			<th style="width:10%">삭제여부</th>
+		        			<th style="width:10%">숨김여부</th>
 		        			<th style="width:10%"></th>
 		        		</tr>
 		        	</thead>	
@@ -31,7 +31,7 @@
 				    	<td>{{ board.explanation }}</td>
 				    	<td>{{ board.delYn }}</td>
 				    	<td>
-				    		<button class="btn btn-sm btn-outline-secondary" type ="button" v-on:click="deleteBoard(board.boardId) ">삭제</button>
+				    		<button class="btn btn-sm btn-outline-secondary" type ="button" v-on:click="deleteBoard(board.boardId) ">숨김</button>
 				    	</td>
 				    </tr>        	
 		        </table>   			
