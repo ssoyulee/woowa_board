@@ -10,7 +10,7 @@ const login = () =>{
 
     $.ajax({
         cache : false,
-        url : "/user/doLogin", // 요기에
+        url : "/user/login", // 요기에
         type : "POST", 
         data : fData, 
         success : function(result) {

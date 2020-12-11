@@ -70,8 +70,18 @@ public class LoginSuccessHandler implements AuthenticationSuccessHandler {
 		    response.getWriter().write(json);
 		    
 		}catch (Exception e) {
+			
 			e.printStackTrace();
-			log.error("오류");
+			
+			Map<String, String> resultMap = new HashMap<String, String>();
+			resultMap.put("resultCode", "99");
+			resultMap.put("resultMsg", e.getMessage());
+
+			String json = new Gson().toJson(resultMap);
+			
+		    response.setContentType("application/json");
+		    response.setCharacterEncoding("UTF-8");
+		    response.getWriter().write(json);
 		}
 	}
 

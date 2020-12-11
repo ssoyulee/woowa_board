@@ -34,7 +34,7 @@ public class UserController {
 		return "user/loginPopup";
 	}
 	
-	@RequestMapping(path = "/login", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+//	@RequestMapping(path = "/login", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
 	public ModelAndView login(@RequestBody UserRequest user, HttpServletRequest request, HttpServletResponse response) throws Exception {
 	    
 		ModelAndView mv = new ModelAndView("jsonView");

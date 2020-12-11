@@ -36,15 +36,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
         http
                 .authorizeRequests()
-                    .antMatchers(
-                    		AUTH_LIST
-                    ).permitAll()
-//                    .antMatchers("/admin/**").hasRole("ADMIN")
-                    .antMatchers("/admin/**").hasAuthority("ROLE_ADMIN")
+                    .antMatchers(AUTH_LIST).permitAll()
+                    .antMatchers(ADMIN_AUTH_LIST).hasAuthority("ROLE_ADMIN")
                     .anyRequest().authenticated()
                 .and()
-//	            .csrf().disable()
-                .csrf().ignoringAntMatchers(AUTH_LIST)
+                .csrf()
+                	.ignoringAntMatchers(AUTH_LIST)
 	            .and()
 	            .headers()
 	                .frameOptions()
@@ -52,11 +49,15 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	            .and()
 	            .formLogin()
 	            	.loginPage("/user/index")
-	            	.loginProcessingUrl("/user/doLogin")
+	            	.loginProcessingUrl("/user/login")
 	            	.usernameParameter("userId")
 	            	.passwordParameter("password")
 	            	.successHandler(loginSuccessHandler)
-	            	.failureHandler(loginFailureHandler);
+	            	.failureHandler(loginFailureHandler)
+	            .and()
+	            .logout()
+	            	.logoutUrl("/user/logout")
+	            	;
 	            	
         
 //                    .addHeaderWriter(
