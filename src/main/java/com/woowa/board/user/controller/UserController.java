@@ -8,7 +8,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -34,51 +33,6 @@ public class UserController {
 		return "user/loginPopup";
 	}
 	
-//	@RequestMapping(path = "/login", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
-	public ModelAndView login(@RequestBody UserRequest user, HttpServletRequest request, HttpServletResponse response) throws Exception {
-	    
-		ModelAndView mv = new ModelAndView("jsonView");
-		
-		try {
-			
-			Optional<UserAccount> result = userService.getUserByUserIdAndPassword(user.getUserId(), user.getPassword());
-			
-			if ( !result.isPresent() ) {
-				throw new Exception("회원 정보가 존재하지 않습니다.");
-			}
-			HttpSession session = request.getSession(true);
-			
-			UserAccount loginUser = result.get();
-			Cookie cookieUserId = new Cookie("userId", loginUser.getUserId());
-			cookieUserId.setPath("/");
-			cookieUserId.setMaxAge(60*60*1);
-	        
-	        response.addCookie(cookieUserId);
-	
-			Cookie cookieRole= new Cookie("role", loginUser.getRole().name());
-			cookieRole.setPath("/");
-			cookieRole.setMaxAge(60*60*1);
-	        
-			response.addCookie(cookieRole);
-	
-			Cookie cookieSsid= new Cookie("ssId", session.getId());
-			cookieSsid.setPath("/");
-			cookieSsid.setMaxAge(60*60*1);
-	        
-			response.addCookie(cookieSsid);
-			
-			userService.updateSession(user.getUserId(), session.getId());
-	        
-	        mv.addObject("resultCode","00");
-	        mv.addObject("resultMsg","SUCCESS");
-	        
-		} catch (Exception e) {
-	        mv.addObject("resultCode","99");
-	        mv.addObject("resultMsg",e.getMessage());
-		}
-
-		return mv;
-	}
 	
 	@RequestMapping(path = "/logout", method = RequestMethod.GET)
 	public ModelAndView logout(HttpServletRequest request, HttpServletResponse response) throws Exception {

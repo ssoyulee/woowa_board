@@ -82,7 +82,7 @@ public class BoardService {
 		
 		boardRepository.save(board);
 		
-		log.info("update ::: board delete success ::: boardId = > {}", boardId);
+		log.info("delete ::: board delete success ::: boardId = > {}", boardId);
 
 	}
 	

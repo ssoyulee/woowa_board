@@ -1,6 +1,6 @@
 package com.woowa.board.post.cotroller;
 
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -46,6 +46,8 @@ public class PostRestController {
 	@GetMapping("/list")
 	public PostResponse select(@RequestParam(required = false) String delYn) throws Exception {
 		
+		log.info("select ::: delYn = > {}", delYn);
+		
 		PostResponse response = new PostResponse();
 		
 		List<Post> listPost = postService.select(delYn);
@@ -69,7 +71,7 @@ public class PostRestController {
 	@GetMapping(path = "/select/{boardId}")
 	public PostResponse selectPostByBoardId( @PathVariable Long boardId) throws Exception {
 
-		log.info("boardId =>" + boardId);
+		log.info("selectPostByBoardId ::: boardId = > {}", boardId);
 		
 		PostResponse response = new PostResponse();
 		
@@ -94,30 +96,28 @@ public class PostRestController {
 	})		
     @ApiResponses({@ApiResponse(response = PostResponse.class, code = 200, message = "OK")})
     @GetMapping(path = "/page/{boardId}")
-	public PostResponse page(
-			@PathVariable Long boardId,
-			@RequestParam(required = false) Integer page,
-			@RequestParam(required = false) Integer pageCount
-			) throws Exception {
-    		
-    	log.info("boardId => "+boardId+" page => "+page+" pageCount =>"+pageCount);
+    public PostResponse page(
+	    		@PathVariable Long boardId,
+	    		@RequestParam(required = false) Integer page,
+	    		@RequestParam(required = false) Integer pageCount
+    		) throws Exception {
+
+    	log.info("updateBoard ::: boardId = > "+boardId+" page = > "+page+" pageCount = >"+pageCount);
+    	
     	PostResponse response = new PostResponse();
 		
-    	if ( page == null ) {
-    		page = 1;
-    	}
-    	if ( pageCount == null ) {
-    		pageCount = 1;
-    	}
+    	if ( page == null ) page = 1;
+    	if ( pageCount == null ) pageCount = 1;
+    	
     	Page<Post> pagePost = postService.findAllByBoardIdAndDelYn(boardId, page, pageCount);
     	
     	if ( pagePost.isEmpty() ) {
     		response.setResponseCode(ResponseCode.IS_EMPTY);
     	} else {
-    		response.setTotalCount(pagePost.getTotalElements());
-    		response.setTotalPage(pagePost.getTotalPages());
     		response.setResponseCode(ResponseCode.SUCCESS);
     		response.setResultList(pagePost.getContent());
+    		response.setTotalPage(pagePost.getTotalPages());
+    		response.setTotalCount(pagePost.getTotalElements());
     	}
 		
 		return response;
@@ -132,15 +132,14 @@ public class PostRestController {
 	@GetMapping(path = "/get/{postId}")
 	public PostResponse getPost( @PathVariable Long postId) throws Exception {
 
-		log.info("boardId =>" + postId);
+		log.info("getPost ::: postId = > {}", postId);
 		
 		PostResponse response = new PostResponse();
 		
 		Optional<Post> post = postService.selectPostById(postId);
 		
     	if ( post.isPresent() ) {
-    		List<Post> listPost = new ArrayList<Post>();
-    		listPost.add(post.get());
+    		List<Post> listPost = Arrays.asList(post.get());
     		response.setResponseCode(ResponseCode.SUCCESS);
     		response.setResultList(listPost);
     	} else {
@@ -156,7 +155,7 @@ public class PostRestController {
 	@PostMapping(path = "/insert")
 	public ResponseDto insertPost(@RequestBody PostRequest insertPost) throws Exception {
 
-		log.info("insertPost =>" + insertPost);
+		log.info("insertPost ::: start");
 		
 		ResponseDto response = new ResponseDto();
 
@@ -180,8 +179,7 @@ public class PostRestController {
 	@PutMapping(path = "/update/{postId}")
 	public ResponseDto updatePost(@PathVariable Long postId, @RequestBody PostRequest updatePost) throws Exception {
 
-		log.info("postId =>" + postId);
-		log.info("updatePost =>" + updatePost.toString());
+		log.info("updatePost ::: postId = > {}", postId);
 
 		ResponseDto response = new ResponseDto();
 		
@@ -205,7 +203,7 @@ public class PostRestController {
 	@DeleteMapping(path = "/delete/{postId}")
 	public ResponseDto deletePost(@PathVariable Long postId) throws Exception {
 
-		log.info("postId =>" + postId);
+		log.info("deletePost ::: postId = > {}", postId);
 		
 		ResponseDto response = new ResponseDto();
 		

@@ -30,11 +30,16 @@ public class PostService {
 	@Autowired
 	private PostRepository postRepository;
 	
+	private Pattern patternStopWord = Pattern.compile("요기요|배달통|위메프오|쿠팡|카카오", Pattern.CASE_INSENSITIVE);
+	private Pattern patternStopURL = Pattern.compile("(href)+[\\s*(=)\"]+(https?://)*(www.)*(\\S)*(naver|daum)+(.com|co.kr)", Pattern.CASE_INSENSITIVE);
+	
 	public List<Post> select(String delYn) throws Exception {
+		
+		log.info("select ::: delYn = > {}", delYn);
 		
 		List<Post> list_post = null;
 		if ( delYn != null && !delYn.isEmpty() ) {
-			list_post =postRepository.findAllByDelYn(delYn);	
+			list_post = postRepository.findAllByDelYn(delYn);	
 		}else {
 			list_post = postRepository.findAll();
 		}
@@ -49,7 +54,7 @@ public class PostService {
 		
 		List<Post> list_post = postRepository.findAllByBoardId(boardId);
 
-		log.info("selectPostByBoardId boardId => {} post count => {}",boardId, list_post.size());
+		log.info("selectPostByBoardId ::: boardId => {} post count => {}",boardId, list_post.size());
 		
 		return list_post;
 	}
@@ -60,7 +65,7 @@ public class PostService {
 		Pageable pa = PageRequest.of(page-1, pageCount, Direction.DESC, "postId");
 		Page<Post> page_post = postRepository.findAllByBoardIdAndDelYn(boardId, delYn, pa);
 		
-		log.info("selectPostByBoardId boardId => {} page => {} pageCount => {} post count => {}",boardId, page, pageCount, page_post.getSize());
+		log.info("selectPostByBoardId ::: boardId => {} page => {} pageCount => {} post count => {}",boardId, page, pageCount, page_post.getSize());
 		
 		return page_post;
 		
@@ -73,7 +78,7 @@ public class PostService {
 		
 		List<Post> list_post = postRepository.findByRegpeIdAndRegDtsBetween(regpeId, startDate, endDate);
 		
-		log.info("findByRegpeIdAndRegDtsBetween regpeId => {} startDate => {} endDate => {} list_post => {}",regpeId, startDate, endDate, list_post.size());
+		log.info("findByRegpeIdAndRegDtsBetween ::: regpeId => {} startDate => {} endDate => {} list_post => {}",regpeId, startDate, endDate, list_post.size());
 		
 		return list_post;
 		
@@ -86,20 +91,18 @@ public class PostService {
 	}
 	
 	public boolean stopword(String content) {
-
-        Pattern p = Pattern.compile("네이버|다음|카카오", Pattern.CASE_INSENSITIVE);
-        Matcher m = p.matcher(content);
         
-        return m.find();
+		Matcher mc = patternStopWord.matcher(content);
+        
+        return mc.find();
         
 	}
 	
 	public boolean stopurl(String content) {
 
-//        Pattern p = Pattern.compile("(href)+[\\s*(=)\"]+(https?://)*(www.)*([naver|daum])+([.com|co.kr])?", Pattern.CASE_INSENSITIVE);
-		Pattern p = Pattern.compile("(href)+[\\s*(=)\"]+(https?://)*(www.)*(\\S)*(naver|daum)+(.com|co.kr)", Pattern.CASE_INSENSITIVE);
-        Matcher m = p.matcher(content);
-        return m.find();
+        Matcher mc = patternStopURL.matcher(content);
+        
+        return mc.find();
         
 	}
 	
@@ -108,7 +111,6 @@ public class PostService {
 		
 		// 게시글을 하루(당일, 00시 넘ㅇ너가면 초기화)에 5개 초과로 작성할 수 없습니다.
 		List<Post> list_post = findByRegpeIdAndRegDtsBetween(insertPost.getUserId());
-		log.info("insert regpe_id = > {} count_post => {}", insertPost.getUserId(), list_post.size());
 		if (list_post.size() >= 5) throw new Exception("게시글은 하루 최대 5개를 초과하여 작성할 수 없습니다.");
 		
 		// 금칙어 존재
@@ -119,7 +121,6 @@ public class PostService {
 		boolean isStopurl = stopurl(insertPost.getPostContent());
 		if (isStopurl) throw new Exception("게시글에 네이버 다음 URL 존재합니다.");
 		
-		// TODO : BOARDID가 존재하는지 확인하자
 		Post post = Post.builder()
 						.boardId(insertPost.getBoardId())		
 						.postTitle(insertPost.getPostTitle())
@@ -131,7 +132,7 @@ public class PostService {
 
 		postRepository.save(post);
 
-		log.info("success insertPost => " + insertPost);
+		log.info("insert ::: post insert success ::: post = > {}", post);
 				
 	}
 	
@@ -154,7 +155,7 @@ public class PostService {
 
 		postRepository.save(post);
 		
-		log.info("success updatePost => " + post);
+		log.info("update ::: post update success ::: post = > {}", post);
 		
 	}
 	
@@ -167,7 +168,7 @@ public class PostService {
 		
 		postRepository.save(post);
 
-		log.info("success deletePost => " + postId);
+		log.info("delete ::: post delete success ::: postId = > {}", postId);
 		
 	}
 	
