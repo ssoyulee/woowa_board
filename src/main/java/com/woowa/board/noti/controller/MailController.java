@@ -33,21 +33,23 @@ public class MailController {
 	@Autowired
 	private MailService mailService;
 	
-	@ApiOperation(value = "메일 전송", notes = "메일을 전송하는 API")
+	@ApiOperation(value = "메일 전송", notes = "메일을 전송하는 API (해당 API는 테스트용)")
     @ApiResponses({@ApiResponse(response = ResponseDto.class, code = 200, message = "OK")})
 	@GetMapping("/send")
-	public ResponseDto sendMain(@RequestParam String address, @RequestParam String title, @RequestParam String message) {
+	public ResponseDto sendMail(@RequestParam String address, @RequestParam String title, @RequestParam String message) {
+		
+		log.info("sendMail ::: start");
 		
 		ResponseDto response = new ResponseDto();
 
 		try {
+			
 			RequestMail requestMail = RequestMail.builder()
 					.address(address)
 					.title(title)
 					.message(message)
 					.build();
 
-			log.info("requestMail => " + requestMail);
 			mailService.sendMail(requestMail);
 
     		response.setResponseCode(ResponseCode.SUCCESS);
@@ -57,6 +59,7 @@ public class MailController {
 			response.setResultMessage(e.getMessage());
 		}
 		
+		log.info("sendMail ::: end");
 		
 		return response;
 	}

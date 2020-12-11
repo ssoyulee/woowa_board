@@ -24,6 +24,8 @@ public class MailService {
     
 	public void sendMail(RequestMail requestMail) throws MessagingException {
 
+		log.info("sendMail ::: requestMail => " + requestMail);
+		
         SimpleMailMessage message = new SimpleMailMessage();
         message.setFrom(fromMail);
         message.setTo(requestMail.getAddress());
