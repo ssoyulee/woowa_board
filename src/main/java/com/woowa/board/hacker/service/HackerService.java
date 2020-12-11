@@ -13,7 +13,7 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Service
-public class HacekerService {
+public class HackerService {
 	
 	private static final String TOP_NEWS_URL = "https://hacker-news.firebaseio.com/v0/newstories.json?print=pretty";
 	

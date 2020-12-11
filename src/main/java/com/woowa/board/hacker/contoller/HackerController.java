@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.woowa.board.common.code.ResponseCode;
-import com.woowa.board.hacker.service.HacekerService;
+import com.woowa.board.hacker.service.HackerService;
 import com.woowa.board.hacker.vo.Hacker;
 import com.woowa.board.hacker.vo.ResponseHacker;
 
@@ -20,10 +20,10 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @RestController
 @RequestMapping("/hacker/api")
-public class HacekerController {
+public class HackerController {
 
 	@Autowired
-	private HacekerService hackerService;
+	private HackerService hackerService;
 
 	@ApiOperation(value = "해커스 최신 뉴스 조회", notes = "해커스 최신 뉴스를 조회 해오는 API")
     @ApiResponses({@ApiResponse(response = ResponseHacker.class, code = 200, message = "OK")})
