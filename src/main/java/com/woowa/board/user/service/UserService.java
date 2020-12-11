@@ -78,6 +78,18 @@ public class UserService {
 	}
 	
 	@Transactional
+	public void updateSession(String userId, String sessionId) throws Exception {
+		
+		User user = userRepository.findById(userId).orElseThrow(() -> new IllegalArgumentException("해당 사용자가 없습니다. userId=" + userId));
+		
+		user.setSessionId(sessionId);
+		userRepository.save(user);
+		
+		logger.info("success updateUser => " + user);
+		
+	}
+	
+	@Transactional
 	public void delete(String userId) throws Exception {
 		
 		User user = userRepository.findById(userId).orElseThrow(() -> new IllegalArgumentException("해당 사용자가 없습니다. userId=" + userId));

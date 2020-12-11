@@ -56,7 +56,7 @@ public class UserController {
 	        
 	        response.addCookie(cookieUserId);
 	
-			Cookie cookieRole= new Cookie("role", loginUser.getRole());
+			Cookie cookieRole= new Cookie("role", loginUser.getRole().name());
 			cookieRole.setPath("/");
 			cookieRole.setMaxAge(60*60*1);
 	        
@@ -68,6 +68,8 @@ public class UserController {
 	        
 			response.addCookie(cookieSsid);
 			
+			userService.updateSession(user.getUserId(), session.getId());
+	        
 	        mv.addObject("resultCode","00");
 	        mv.addObject("resultMsg","SUCCESS");
 	        
@@ -75,9 +77,7 @@ public class UserController {
 	        mv.addObject("resultCode","99");
 	        mv.addObject("resultMsg",e.getMessage());
 		}
-				
 
-        
 		return mv;
 	}
 	
@@ -87,6 +87,7 @@ public class UserController {
 		ModelAndView mv = new ModelAndView("jsonView");
 		
 		boolean isUserId = false;
+		String userId = null;
 		
 		Cookie[] cookies = request.getCookies();
 		for(Cookie cookie : cookies) {
@@ -97,9 +98,16 @@ public class UserController {
 				response.addCookie(cookie);
 				isUserId=true;
 			}
+			
+			if ( cookie.getName().equals("userId") ) {
+				userId = cookie.getValue();
+			}
 		}
 
 		if (isUserId) {
+			
+			userService.updateSession(userId, null);
+			
 	        mv.addObject("resultCode","00");
 	        mv.addObject("resultMsg","SUCCESS");
 		}else{
