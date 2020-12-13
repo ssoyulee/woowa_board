@@ -28,6 +28,15 @@ public class MailService {
 
 		log.info("sendMail ::: requestMail => " + requestMail);
 		
+		// Google 계정이 아닐 경우 보낸사람 필수
+		if ( fromMail == null || "".equals(fromMail)) {
+			log.error("이메일 발신자 정보가 없습니다.");
+			return;			
+		}
+		if ( requestMail.getAddress() == null || "".equals(requestMail.getAddress())){
+			log.error("이메일 수신자 정보가 없습니다.");
+			return;
+		}
         SimpleMailMessage message = new SimpleMailMessage();
         message.setFrom(fromMail);
         message.setTo(requestMail.getAddress());
