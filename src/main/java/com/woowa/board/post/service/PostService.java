@@ -41,7 +41,7 @@ public class PostService {
 		if ( delYn != null && !delYn.isEmpty() ) {
 			list_post = postRepository.findAllByDelYn(delYn);	
 		}else {
-			list_post = postRepository.findAll();
+			list_post = postRepository.findAllByOrderByPostIdDesc();
 		}
 
 		log.info("select delYn => {} post count => ", delYn, list_post.size());

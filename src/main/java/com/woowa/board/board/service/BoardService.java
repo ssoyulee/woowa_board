@@ -29,7 +29,7 @@ public class BoardService {
 			return boardRepository.findAllByDelYn(delYn);	
 		}
 		
-		return boardRepository.findAll();
+		return boardRepository.findAllByOrderByBoardIdDesc();
 	}
 	
 	public Optional<Board> getBoardById(Long boardId) throws Exception {

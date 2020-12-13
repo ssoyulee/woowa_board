@@ -10,6 +10,8 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface BoardRepository extends JpaRepository<Board, Long>{
 
+	List<Board> findAllByOrderByBoardIdDesc();
+	
 	List<Board> findAllByDelYn(String delYn);
 	
 	Page<Board> findAllByDelYn(String delYn, Pageable pageable); 
