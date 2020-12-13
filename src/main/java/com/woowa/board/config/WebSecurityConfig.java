@@ -47,7 +47,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	                .sameOrigin()
 	            .and()
 	            .formLogin()
-	            	.loginPage("/user/index")
+	            	.loginPage("/user/defaultLogin")
 	            	.loginProcessingUrl("/user/login")
 	            	.usernameParameter("userId")
 	            	.passwordParameter("password")

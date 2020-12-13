@@ -23,7 +23,7 @@ public class UserController {
 	private UserService userService;
 	
 	@RequestMapping(path = "/index")
-	public String index() throws Exception {
+	public String loginPopup() throws Exception {
 		return "user/loginPopup";
 	}
 	
@@ -40,7 +40,7 @@ public class UserController {
 		
 		Cookie[] cookies = request.getCookies();
 		for(Cookie cookie : cookies) {
-			if ( cookie.getName().equals("userId") || cookie.getName().equals("role") || cookie.getName().equals("ssId")) {
+			if ( cookie.getName().equals("userId") || cookie.getName().equals("role") || cookie.getName().equals("ssId") || cookie.getName().equals("JSESSIONID") ) {
 				cookie.setPath("/");
 				cookie.setMaxAge(0);
 				response.addCookie(cookie);
@@ -69,5 +69,10 @@ public class UserController {
 	@RequestMapping(path = "/error", method = RequestMethod.GET)
 	public String error(HttpServletRequest request, HttpServletResponse response) throws Exception {
         return "error";
+	}
+	
+	@RequestMapping(path = "/defaultLogin", method = RequestMethod.GET)
+	public String defaultLogin (HttpServletRequest request, HttpServletResponse response) throws Exception {
+        return "user/login";
 	}
 }
