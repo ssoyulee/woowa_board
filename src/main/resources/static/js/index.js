@@ -15,7 +15,13 @@ $(function() {
 				    success: function(result){
 						console.debug("resultCode => ", result);
 						if ( result.resultCode == '00' ){	
-					    	app.hackerNews = result.listHacker;
+							var vueList = new Array();
+							$.each(result.listHacker, (index, news)=>{
+								if ( news != null ){
+									vueList.push(news);	
+								}
+							});										
+					    	app.hackerNews = vueList;
 						}else{
 							alert(result.resultMessage);
 						}
