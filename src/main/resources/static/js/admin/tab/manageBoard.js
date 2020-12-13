@@ -75,9 +75,12 @@ $(function() {
 						}
 				    },
 				    
-				    error: function (request, status, error){        
-						console.error("status => " + request.status + "error => " + request.responseText);
-						alert("오류가 발생하였습니다. 관리자에게 문의해주세요~");                 
+				    error: function (request, status, error){
+						if (request.responseJSON.status === 400){
+							alert(request.responseJSON.errors[0].defaultMessage);	
+						}else{
+							alert("오류가 발생하였습니다. 관리자에게 문의해주세요~");	
+						}
 				    }
 				});						
 			},
@@ -104,8 +107,11 @@ $(function() {
 				    },
 				    
 				    error: function (request, status, error){        
-						console.error("status => " + request.status + "error => " + request.responseText);
-						alert("오류가 발생하였습니다. 관리자에게 문의해주세요~");                   
+						if (request.responseJSON.status === 400){
+							alert(request.responseJSON.errors[0].defaultMessage);	
+						}else{
+							alert("오류가 발생하였습니다. 관리자에게 문의해주세요~");	
+						}         
 				    }
 				});					
 			},

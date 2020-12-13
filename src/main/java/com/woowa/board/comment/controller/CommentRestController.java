@@ -2,6 +2,8 @@ package com.woowa.board.comment.controller;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -88,7 +90,7 @@ public class CommentRestController {
 	@ApiOperation(value = "댓글 정보 입력", notes = "댓글을 신규로 생성할때 사용한다.")
 	@ApiResponses({@ApiResponse(response = ResponseDto.class, code = 200, message = "OK")})
 	@PostMapping(path = "/insert")
-	public ResponseDto insertPost(@RequestBody CommentRequest insertComment) throws Exception {
+	public ResponseDto insertPost(@RequestBody @Valid CommentRequest insertComment) throws Exception {
 
 		log.info("insertPost ::: start");
 		
@@ -112,7 +114,7 @@ public class CommentRestController {
 	})		
 	@ApiResponses({@ApiResponse(response = ResponseDto.class, code = 200, message = "OK")})
 	@PutMapping(path = "/update/{commentId}")
-	public ResponseDto updateComment(@PathVariable Long commentId, @RequestBody CommentRequest updateComment) throws Exception {
+	public ResponseDto updateComment(@PathVariable Long commentId, @RequestBody @Valid CommentRequest updateComment) throws Exception {
 
 		log.info("updateComment ::: commentId = > {}", commentId);
 

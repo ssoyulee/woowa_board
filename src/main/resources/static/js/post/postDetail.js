@@ -96,8 +96,11 @@ $(function() {
 						}
 			        },
 			        error: function (request, status, error){
-						console.error("status => " + request.status + "error => " + request.responseText);
-						alert("오류가 발생하였습니다. 관리자에게 문의해주세요~"); 
+						if (request.responseJSON.status === 400){
+							alert(request.responseJSON.errors[0].defaultMessage);	
+						}else{
+							alert("오류가 발생하였습니다. 관리자에게 문의해주세요~");	
+						}    
 			        }
 			    });
 				
@@ -107,10 +110,10 @@ $(function() {
 
 				let commentBody = {
 					userId : postDetailApp.loginId,
+					postId : reqPostId,
 					commentContent : $('#comment' +commentId).val()
 				};
 				
-				debugger;
 			    $.ajax({
 			        cache : false,
 			        url : "/comment/api/update/" + commentId, // 요기에
@@ -125,8 +128,11 @@ $(function() {
 						}
 			        }, 
 				    error: function (request, status, error){        
-						console.error("status => " + request.status + "error => " + request.responseText);
-						alert("오류가 발생하였습니다. 관리자에게 문의해주세요~");        
+						if (request.responseJSON.status === 400){
+							alert(request.responseJSON.errors[0].defaultMessage);	
+						}else{
+							alert("오류가 발생하였습니다. 관리자에게 문의해주세요~");	
+						}       
 				    }
 			    });
 				

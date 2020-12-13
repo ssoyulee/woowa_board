@@ -60,7 +60,7 @@ $(function() {
 				});				
 			},
 			insertUser : () => {
-				
+				manageUserApp.userForm.writeId = headerApp.loginId;
 				$.ajax({
 					cache : false,
 				    url: "/user/api/insert/",
@@ -79,12 +79,16 @@ $(function() {
 				    },
 				    
 				    error: function (request, status, error){        
-						console.error("status => " + request.status + "error => " + request.responseText);
-						alert("오류가 발생하였습니다. 관리자에게 문의해주세요~");                  
+						if (request.responseJSON.status === 400){
+							alert(request.responseJSON.errors[0].defaultMessage);	
+						}else{
+							alert("오류가 발생하였습니다. 관리자에게 문의해주세요~");	
+						}              
 				    }
 				});						
 			},
 			updateUser : () => {
+				manageUserApp.userForm.writeId = headerApp.loginId;
 				$.ajax({
 					cache : false,
 				    url: "/user/api/update/" + manageUserApp.userForm.userId,
@@ -103,8 +107,11 @@ $(function() {
 				    },
 				    
 				    error: function (request, status, error){        
-						console.error("status => " + request.status + "error => " + request.responseText);
-						alert("오류가 발생하였습니다. 관리자에게 문의해주세요~");                
+						if (request.responseJSON.status === 400){
+							alert(request.responseJSON.errors[0].defaultMessage);	
+						}else{
+							alert("오류가 발생하였습니다. 관리자에게 문의해주세요~");	
+						}              
 				    }
 				});						
 			},
@@ -146,7 +153,7 @@ $(function() {
 	$('#headerApp').on('DOMSubtreeModified', '#heardLogin', function(){
 		manageUserApp.loginId = headerApp.loginId;
 		manageUserApp.role = headerApp.role;
-		if (!manageUserApp.loginId)
+		if (!manageUserApp.loginId){
 			location.href = "/index";
 		}
 	});

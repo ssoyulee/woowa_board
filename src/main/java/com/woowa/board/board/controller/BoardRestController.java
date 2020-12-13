@@ -1,8 +1,11 @@
+
 package com.woowa.board.board.controller;
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
+
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -90,7 +93,7 @@ public class BoardRestController {
 	@ApiOperation(value = "게시판 정보 입력", notes = "게시판을 신규로 생성할때 사용한다.")
 	@ApiResponses({@ApiResponse(response = ResponseDto.class, code = 200, message = "OK")})
 	@PostMapping(path = "/insert")
-	public ResponseDto insertBoard(@RequestBody BoardRequest insertBoard) throws Exception {
+	public ResponseDto insertBoard(@RequestBody @Valid BoardRequest insertBoard) throws Exception {
 
 		log.info("insertBoard ::: start");
 		
@@ -114,7 +117,7 @@ public class BoardRestController {
 	})		
 	@ApiResponses({@ApiResponse(response = ResponseDto.class, code = 200, message = "OK")})
 	@PutMapping(path = "/update/{boardId}")
-	public ResponseDto updateBoard(@PathVariable Long boardId, @RequestBody BoardRequest updateBoard) throws Exception {
+	public ResponseDto updateBoard(@PathVariable Long boardId, @RequestBody @Valid BoardRequest updateBoard) throws Exception {
 
 		log.info("updateBoard ::: boardId = > {}", boardId);
 
