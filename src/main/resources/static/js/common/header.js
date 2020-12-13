@@ -24,6 +24,7 @@ $(function() {
 							});
 				    		headerApp.boardList = result.resultList;
 						}else{
+							headerApp.boardList = [];
 							alert(result.resultMessage);
 						}
 				    },

@@ -40,6 +40,7 @@ $(function() {
 						if ( result.resultCode == '00' ){
 					    	postDetailApp.commentList = result.resultList;
 						}else{
+							postDetailApp.commentList = [];
 							console.info(result.resultMessage);
 						}		
 				    },

@@ -68,6 +68,7 @@ $(function() {
 							boardApp.totalCount = result.totalCount;
 							
 						}else{
+							boardApp.postList = [];
 							alert(result.resultMessage);
 						}	
 				    },
