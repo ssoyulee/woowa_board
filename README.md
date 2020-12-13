@@ -43,10 +43,10 @@ woowa bros homework (board web)
 	- woowa.board.user	: 사용자 관련 파일
 
 ### 설명
-	금칙어 : 요기요|배달통|위메프오|쿠팡|카카오
-	페이징 : 1 page당 게시물 5개
-	이메일 : 이메일 미존재 시 서버가 올라오지 않는 현상이 있습니다. (댓글 작성 시 이메일 전송)
-	
+	금칙어	: 요기요|배달통|위메프오|쿠팡|카카오
+	페이징	: 1 page당 게시물 5개
+	이메일	: 이메일 미존재 시 서버가 올라오지 않는 현상이 있습니다. (댓글 작성 시 이메일 전송)
+	랭킹	: 랭킹의 경우에는 woowa_batch에서 배치 수행 후 확인 가능
 ### swagger 
 	http://localhost:{port}/swagger-ui.html
 	ex) http://localhost:8080/swagger-ui.html
