@@ -1,11 +1,12 @@
 # woowa_borad
+woowa bros homework (board web)
 
 ### 환경설정 및 선행 조건
 ##### 포트 변경 필요 시 
 
 	application.properties 파일 내 server.port 변경
 
-##### 메일 설정
+##### 메일 설정 (필수!!!!!!!!!!!!)
 
 	1. 2차 인증
 		구글 계정 관리 접속 (https://myaccount.google.com/security)
@@ -42,6 +43,11 @@
 	- woowa.board.post	: 게시물 관련 파일
 	- woowa.board.user	: 사용자 관련 파일
 
+### 설명
+	금칙어 : 요기요|배달통|위메프오|쿠팡|카카오
+	페이징 : 1 page당 게시물 5개
+	이메일 : 이메일 미존재 시 서버가 올라오지 않는 현상이 있습니다. (댓글 작성 시 이메일 전송)
+	
 ### swagger 
 	http://localhost:{port}/swagger-ui.html
 	ex) http://localhost:8080/swagger-ui.html
