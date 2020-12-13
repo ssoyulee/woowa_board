@@ -4,6 +4,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -153,7 +155,7 @@ public class PostRestController {
 	@ApiOperation(value = "게시물 정보 입력", notes = "게시물을 신규로 생성할때 사용한다.")
 	@ApiResponses({@ApiResponse(response = ResponseDto.class, code = 200, message = "OK")})
 	@PostMapping(path = "/insert")
-	public ResponseDto insertPost(@RequestBody PostRequest insertPost) throws Exception {
+	public ResponseDto insertPost(@RequestBody @Valid PostRequest insertPost) throws Exception {
 
 		log.info("insertPost ::: start");
 		
@@ -177,7 +179,7 @@ public class PostRestController {
 	})		
 	@ApiResponses({@ApiResponse(response = ResponseDto.class, code = 200, message = "OK")})
 	@PutMapping(path = "/update/{postId}")
-	public ResponseDto updatePost(@PathVariable Long postId, @RequestBody PostRequest updatePost) throws Exception {
+	public ResponseDto updatePost(@PathVariable Long postId, @RequestBody @Valid PostRequest updatePost) throws Exception {
 
 		log.info("updatePost ::: postId = > {}", postId);
 

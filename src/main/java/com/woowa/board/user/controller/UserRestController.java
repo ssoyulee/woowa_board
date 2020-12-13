@@ -1,9 +1,10 @@
 package com.woowa.board.user.controller;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
+
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -17,7 +18,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.woowa.board.common.code.ResponseCode;
 import com.woowa.board.common.dto.ResponseDto;
-import com.woowa.board.post.dao.Post;
 import com.woowa.board.user.dao.UserAccount;
 import com.woowa.board.user.service.UserService;
 import com.woowa.board.user.vo.UserRequest;
@@ -89,7 +89,7 @@ public class UserRestController {
 	@ApiOperation(value = "사용자 정보 입력", notes = "사용자 정보를 입력한다.")
 	@ApiResponses({@ApiResponse(response = ResponseDto.class, code = 200, message = "OK")})
 	@PostMapping(path = "/insert")
-	public ResponseDto insertUser(@RequestBody UserRequest insertUser) throws Exception {
+	public ResponseDto insertUser(@RequestBody @Valid UserRequest insertUser) throws Exception {
 
 		log.info("insertUser ::: start");
 		
@@ -113,7 +113,7 @@ public class UserRestController {
 	})		
 	@ApiResponses({@ApiResponse(response = ResponseDto.class, code = 200, message = "OK")})
 	@PutMapping(path = "/update/{userId}")
-	public ResponseDto updateUser(@PathVariable String userId, @RequestBody UserRequest updateUser) throws Exception {
+	public ResponseDto updateUser(@PathVariable String userId, @RequestBody @Valid UserRequest updateUser) throws Exception {
 
 		log.info("updateUser ::: userId = > {}", userId);
 
