@@ -14,6 +14,7 @@ import javax.persistence.SequenceGenerator;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
+import com.woowa.board.post.dao.Post;
 import com.woowa.board.user.dao.UserAccount;
 
 import lombok.Builder;
@@ -68,6 +69,11 @@ public class Comment {
 	@ManyToOne
 	@JoinColumn(name="regpe_id", referencedColumnName="user_id", insertable=false, updatable=false)
 	private UserAccount user;
+	
+	@ManyToOne
+	@JoinColumn(name="post_id", referencedColumnName="post_id", insertable=false, updatable=false)
+	private Post post;
+	
 	
 	@Builder
 	public Comment(Long commentId, Long postId, String commentContent, String delYn, String regpeId, String modpeId) {

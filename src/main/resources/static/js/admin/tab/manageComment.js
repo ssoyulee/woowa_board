@@ -14,6 +14,9 @@ $(function() {
 				    dataType: "json",
 				    success: function(result){
 						if ( result.resultCode == '00' ){
+							$.each(result.resultList, (index, comment)=>{
+								comment.url = "/post/detail?boardId="+comment.post.boardId+"&postId=" + comment.postId
+							});										
 					    	manageCommentApp.commentList = result.resultList;
 						}else{
 							alert(result.resultMessage);

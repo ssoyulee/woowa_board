@@ -1,3 +1,4 @@
+
 let boardApp;
 
 $(function() {
@@ -62,7 +63,7 @@ $(function() {
 						if ( result.resultCode == '00' ){
 							$.each(result.resultList, (index, post)=>{
 								post.url = "/post/detail?boardId="+post.boardId+"&postId=" + post.postId
-							})
+							});
 					    	boardApp.postList = result.resultList;
 							boardApp.totalPage = result.totalPage;
 							boardApp.totalCount = result.totalCount;

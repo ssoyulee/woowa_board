@@ -14,6 +14,9 @@ $(function() {
 				    dataType: "json",
 				    success: function(result){
 						if ( result.resultCode == '00' ){
+							$.each(result.resultList, (index, post)=>{
+								post.url = "/post/detail?boardId="+post.boardId+"&postId=" + post.postId
+							});							
 					    	managePostApp.postList = result.resultList;
 						}else{
 							alert(result.resultMessage);

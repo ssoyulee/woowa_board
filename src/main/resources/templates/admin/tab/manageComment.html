@@ -18,7 +18,7 @@
 		        	<thead class="thead-light">
 		        		<tr>
 		        			<th style="width:10%">댓글 ID</th>
-		        			<th style="width:30%">게시물 ID</th>
+		        			<th style="width:30%">게시물 제목</th>
 		        			<th style="width:40%">코멘트</th>
 		        			<th style="width:10%">숨김여부</th>
 		        			<th style="width:10%"></th>
@@ -26,7 +26,7 @@
 		        	</thead>
 				    <tr v-for="comment in commentList">
 				    	<td>{{ comment.commentId }}</td>
-				    	<td>{{ comment.postId }}</td>
+				    	<td><a :href=comment.url>{{ comment.post.postTitle }}</a></td>
 				    	<td>{{ comment.commentContent }}</td>
 				    	<td>{{ comment.delYn }}</td>
 				    	<td>
