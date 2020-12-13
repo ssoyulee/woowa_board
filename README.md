@@ -28,7 +28,6 @@ woowa bros homework (board web)
 
 ### 실행 방법
 	mvnw spring-boot:run
-	java -Dfile.encoding=UTF-8 -jar target/board-0.0.1-SNAPSHOT.war
 	
 ### 프로젝트 구조 (주요 패키지)
 	- woowa.board.common	: 공통 파일
